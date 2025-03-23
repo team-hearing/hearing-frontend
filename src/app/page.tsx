@@ -1,9 +1,11 @@
-// app/page.tsx
-export default function HomePage() {
+"use client"
+
+import IntroScreen from "./components/intro-screen"
+
+export default function Home() {
   return (
-    <div>
-      <h1>홈 페이지</h1>
-      <p>환영합니다! 이곳은 홈 페이지입니다.</p>
-    </div>
-  );
+    <main className="flex min-h-screen h-screen flex-col items-center justify-center p-4 bg-white">
+      <IntroScreen />
+    </main>
+  )
 }

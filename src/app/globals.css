@@ -14,7 +14,69 @@ main {
 @tailwind components;
 @tailwind utilities;
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blinkCursor {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@layer components {
+  .animate-fadeIn {
+    animation: fadeIn 1s ease-out forwards;
+  }
+  
+  .animate-blink {
+    animation: blinkCursor 1s infinite;
+  }
+}
+
 @layer base {
+  :root {
+    --font-default: 'Noto Sans KR';
+  }
+
+  /* 한글에는 Noto Sans KR 적용, 영문에는 Open Sans 적용 */
+  :lang(ko) {
+    --font-default: 'Noto Sans KR';
+  }
+  
+  :lang(en) {
+    --font-default: 'Open Sans';
+  }
+
+  /* 특정 클래스로 직접 지정 */
+  .font-kr {
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  
+  .font-en {
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  /* 한글 자동 감지 */
+  :is(h1, h2, h3, h4, h5, h6, p, span, div):not(.font-en) > :lang(ko) {
+    font-family: 'Noto Sans KR';
+  }
+  
+  /* 영문 자동 감지 */
+  :is(h1, h2, h3, h4, h5, h6, p, span, div):not(.font-kr) > :lang(en) {
+    font-family: 'Open Sans';
+  }
+
   @font-face {
     font-family: 'Noto Sans KR';
     font-style: normal;
@@ -67,5 +129,33 @@ main {
     src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff2) format('woff2'),
          url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff) format('woff'),
          url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf) format('opentype');
+  }
+
+  @font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    src: url(https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsiH0B4gaVI.woff2) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0B4gaVI.woff2) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url(https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsg-1x4gaVI.woff2) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 800;
+    src: url(https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgshZ1x4gaVI.woff2) format('woff2');
   }
 }
