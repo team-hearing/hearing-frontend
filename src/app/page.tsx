@@ -46,6 +46,13 @@ export default function HomePage() {
     return () => clearInterval(typingInterval);
   }, [showHearing]);
 
+  // 컴포넌트가 렌더링될 때마다 확인용 로그
+  useEffect(() => {
+    console.log("showHearing:", showHearing);
+    console.log("typedText:", typedText);
+    console.log("typingComplete:", typingComplete);
+  }, [showHearing, typedText, typingComplete]);
+
   return (
     <div className="flex flex-col items-center justify-center w-full h-screen">
       <div className="flex flex-col items-center justify-center space-y-16 md:space-y-20 mb-16">
@@ -82,7 +89,7 @@ export default function HomePage() {
             
           {/* 히링 아래 밑줄 */}
           {showHearing && (
-            <div className="relative w-full max-w-xs mx-auto">
+            <div className="relative w-full max-w-xs mx-auto mt-2 z-10">
               <div className="h-0.5 bg-primary w-full"></div>
               <div className="absolute right-0 -top-2 w-4 h-4 bg-primary rounded-full"></div>
             </div>

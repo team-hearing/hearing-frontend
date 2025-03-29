@@ -15,17 +15,14 @@ module.exports = {
         kr: ["Noto Sans KR", "sans-serif"],
         sans: ["Open Sans", "sans-serif"],
       },
-      fontSize: {
-        hero: ["170px", { lineHeight: "1" }],
-      },
       keyframes: {
-        pulse: {
+        blink: {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0" },
         },
       },
       animation: {
-        pulse: "pulse 1s ease-in-out infinite",
+        blink: "blink 1s ease-in-out infinite",
       },
     },
   },
