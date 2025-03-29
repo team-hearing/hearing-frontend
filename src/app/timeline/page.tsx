@@ -1,23 +1,16 @@
-import Link from "next/link";
+"use client";
+import { motion } from "framer-motion";
 
 export default function TimelinePage() {
-  // 예시 데이터 (실제로는 API나 데이터베이스에서 가져올 수 있음)
-  const postsById = {
-    1: { id: 1, title: "게시물 1" },
-    2: { id: 2, title: "게시물 2" },
-    3: { id: 3, title: "게시물 3" },
-  };
-
   return (
-    <div>
-      <h1>타임라인</h1>
-      <ul>
-        {Object.values(postsById).map((post) => (
-          <li key={post.id}>
-            <Link href={`/timeline/${post.id}`}>{post.title}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <motion.div
+      className="flex flex-col items-center justify-center w-full h-screen bg-white"
+      initial={{ opacity: 0 }}       // 시작시 투명
+      animate={{ opacity: 1 }}       // 페이드 인 애니메이션
+      transition={{ duration: 1 }}   // 자연스러운 전환
+    >
+      <h1 className="font-kr text-h1 font-bold text-primary">타임라인 페이지</h1>
+      <p className="text-body text-gray-medium">여기는 타임라인 페이지입니다.</p>
+    </motion.div>
   );
 }
