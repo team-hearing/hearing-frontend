@@ -1,4 +1,43 @@
 /* app/globals.css */
+/* 웹폰트 설정 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+  font-family: 'Noto Sans KR', 'Open Sans', sans-serif;
+}
+
+/* 커서 깜박임 애니메이션 */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s infinite;
+}
+
+/* 타이핑 효과 애니메이션 */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* 다국어 폰트 설정 */
+:lang(ko) { font-family: 'Noto Sans KR', sans-serif; }
+:lang(en) { font-family: 'Open Sans', sans-serif; }
+
 .navbar {
   display: flex;
   gap: 20px;
