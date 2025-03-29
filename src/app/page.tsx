@@ -1,23 +1,21 @@
 "use client";
-
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export default function HomePage() {
   const [showCursor, setShowCursor] = useState(true);
   const [typedText, setTypedText] = useState("");
   const [showHearing, setShowHearing] = useState(false);
   const [typingComplete, setTypingComplete] = useState(false);
-
   const fullText = "히링(HEARING)";
 
-  // 커서 깜박임 효과
   useEffect(() => {
+    // 커서 깜빡임 
     const cursorInterval = setInterval(() => {
       setShowCursor((prev) => !prev);
     }, 530);
 
-    // 3초 후에 타이핑 시작
+    // 3초 후 히링 타이핑 시작
     const hearingTimeout = setTimeout(() => {
       setShowHearing(true);
     }, 3000);
@@ -28,7 +26,6 @@ export default function HomePage() {
     };
   }, []);
 
-  // 타이핑 효과
   useEffect(() => {
     if (!showHearing) return;
 
@@ -41,60 +38,47 @@ export default function HomePage() {
         clearInterval(typingInterval);
         setTypingComplete(true);
       }
-    }, 150); // 타이핑 속도 조절
+    }, 150);
 
     return () => clearInterval(typingInterval);
   }, [showHearing]);
 
-  // 컴포넌트가 렌더링될 때마다 확인용 로그
-  useEffect(() => {
-    console.log("showHearing:", showHearing);
-    console.log("typedText:", typedText);
-    console.log("typingComplete:", typingComplete);
-  }, [showHearing, typedText, typingComplete]);
-
   return (
-    <div className="flex flex-col items-center justify-center w-full h-screen">
-      <div className="flex flex-col items-center justify-center space-y-16 md:space-y-20 mb-16">
-        <motion.h1
-          className="font-kr text-6xl md:text-7xl lg:text-9xl xl:text-[170px] font-bold tracking-tight"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          역사를 듣다<span className="text-black">.</span>
-        </motion.h1>
+    <div className="flex flex-col items-center justify-center w-full h-screen gap-6">
+      {/* '역사를 듣다.' 텍스트 */}
+      <motion.h1
+        className="font-kr text-5xl md:text-7xl lg:text-9xl font-bold tracking-tight"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        역사를 듣다.
+      </motion.h1>
 
-        <div className="w-full flex flex-col items-center justify-center">
-          <AnimatePresence>
-            {showHearing ? (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="mb-4 h-16 flex items-center justify-center"
-              >
-                <h2 className="text-4xl md:text-5xl font-medium text-primary">
-                  {typedText}
-                  {!typingComplete && showCursor && (
-                    <span className="inline-block w-1 h-10 bg-primary ml-1 animate-blink"></span>
-                  )}
-                </h2>
-              </motion.div>
-            ) : (
-              <div className="h-16 mb-4 flex items-center justify-center">
-                {showCursor && <div className="h-10 w-1 bg-black animate-blink"></div>}
-              </div>
-            )}
-          </AnimatePresence>
-            
-          {/* 히링 아래 밑줄 */}
-          {showHearing && (
-            <div className="relative w-full max-w-xs mx-auto mt-2 z-10">
-              <div className="h-0.5 bg-primary w-full"></div>
-              <div className="absolute right-0 -top-2 w-4 h-4 bg-primary rounded-full"></div>
-            </div>
-          )}
-        </div>
+      {/* '히링(HEARING)' 타이핑 영역 */}
+      <div className="relative mt-12 w-full max-w-xs mx-auto text-center">
+        
+        {/* (히링 타이핑 전) 커서 깜빡임 */}
+        {!showHearing && showCursor && (
+          <div className="absolute left-1/2 transform -translate-x-1/2 -top-5 h-10 w-1 bg-gray-dark animate-blink"></div>
+        )}
+
+        {/* (히링 타이핑 시작 후) 위쪽에 텍스트 타이핑 및 커서 */}
+        {showHearing && (
+          <motion.div
+            className="absolute left-1/2 transform -translate-x-1/2 -top-10 text-2xl md:text-4xl font-medium text-primary whitespace-nowrap"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="flex items-center justify-center">
+              {typedText}
+              {!typingComplete && showCursor && (
+                <span className="inline-block w-1 h-6 md:h-10 bg-primary ml-1 animate-blink"></span>
+              )}
+            </span>
+          </motion.div>
+        )}
       </div>
     </div>
   );
