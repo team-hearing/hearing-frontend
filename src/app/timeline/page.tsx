@@ -27,13 +27,13 @@ export default function Timeline() {
     <div className="w-full px-4 py-10 bg-white relative">
       {/* 타이틀 */}
       <div className="mb-8">
-        <div className="w-full h-px bg-gray-400 mb-4" />
+        <div className="w-full h-px bg-gray-dark mb-4" />
         <h2 className="text-lg font-medium">역사를 듣다.</h2>
         <h1 className="text-3xl font-bold tracking-widest">H E A R I N G</h1>
       </div>
 
-      {/*  w-full 타임라인 선 (절대 위치, 모든 마커 뒤에 배경으로 표시) */}
-      <div className="absolute left-0 top-[330px] w-full h-px bg-green-500 z-0" />
+      {/* 타임라인 선) */}
+      <div className="absolute left-0 top-[330px] w-full h-1 bg-primary z-0" />
 
       {/* 가로 스크롤 타임라인 영역 */}
       <div
@@ -50,8 +50,8 @@ export default function Timeline() {
           {data.map((block) => (
             <div key={block.year} className="flex flex-col items-center">
               {/* 회색 이미지 자리 */}
-              <div className="w-32 h-40 bg-gray-300 flex items-center justify-center text-sm text-gray-500 mb-2">
-                이미지 예정
+              <div className="w-32 h-40 bg-gray-light flex items-center justify-center text-sm text-gray-500 mb-2">
+                이미지
               </div>
 
               {/* 날짜 / 제목 */}
@@ -72,17 +72,20 @@ export default function Timeline() {
               {/* 연도 */}
               <p className="font-bold mb-2">{block.year}</p>
 
-              {/* 세계사 박스 */}
-              <div className="bg-red-100 px-4 py-2 inline-block max-w-xs text-sm text-black text-left">
-                <p className="text-red-600 font-bold mb-1">세계사</p>
-                <ul className="list-disc list-inside">
-                  {block.events.map((event, idx) => (
-                    <li key={idx}>
-                      {event.date && <span>{event.date} </span>}
-                      {event.title}
-                    </li>
-                  ))}
-                </ul>
+              {/* 세계사 사건 */}
+              <div className="flex items-start">
+                <div className="bg-secondary w-10 h-5 flex items-center justify-center"></div>
+                <div className="ml-2">
+                  <p className="font-bold mb-2">세계사</p>
+                  <ul className="list-disc pl-4">
+                    {block.events.map((event, idx) => (
+                      <li key={idx}>
+                        {event.date && <span>{event.date} </span>}
+                        {event.title}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           ))}
