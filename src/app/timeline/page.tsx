@@ -33,7 +33,7 @@ export default function Timeline() {
       </div>
 
       {/* 타임라인 선 */}
-      <div className="absolute left-0 top-[500px] w-full h-1 bg-primary z-0" />
+      <div className="absolute left-0 top-[560px] w-full h-1 bg-primary z-0" />
 
       {/* 가로 스크롤 타임라인 영역 */}
       <div
@@ -51,9 +51,9 @@ export default function Timeline() {
             <div key={block.year} className="flex flex-col">
               
               {/* 상단 영역 */}
-              <div className="relative">
+              <div className="relative mb-24">
                 {/* 이미지 */}
-                <div className="pl-20">
+                <div className="pl-28">
                   <div className="w-32 h-40 bg-gray-light flex items-center justify-center text-sm text-gray-500 mb-2">
                     이미지
                   </div>
@@ -61,14 +61,14 @@ export default function Timeline() {
 
                 {/* 제목/날짜 */}
                 {block.events[0] && (
-                  <div className="pl-20 text-start mb-4">
+                  <div className="pl-28 text-start mb-4">
                     <p className="text-sm font-regular">{block.events[0].date}</p>
                     <p className="text-sm font-bold">{block.events[0].title}</p>
                   </div>
                 )}
 
                 {/* 연도 마커 */}
-                <div className="absolute left-8 top-[185px] z-10">
+                <div className="absolute left-8 top-[244px] z-10">
                   <p className="text-center text-body font-bold">{block.year}</p>
                   <div className="w-6 h-6 rounded-full border-2 border-primary bg-white flex items-center justify-center">
                   </div>
@@ -76,8 +76,8 @@ export default function Timeline() {
               </div>
 
               {/* 하단 영역 - 세계사 리스트 */}
-              <div className="flex items-start gap-2 mt-12 pl-20">
-                <div className="bg-secondary w-10 h-5 flex items-center justify-center"></div>
+              <div className="flex items-start gap-2 pl-28">
+                <div className="bg-secondary w-8 h-4 flex items-center justify-center"></div>
                 <div className="ml-2">
                   <p className="font-bold mb-2">세계사</p>
                   <ul className="list-disc pl-4">
