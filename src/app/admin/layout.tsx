@@ -1,3 +1,11 @@
-export default function AdminLayout() {
-  return <div></div>;
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="p-4">
+      <div>{children}</div>
+    </div>
+  );
 }
