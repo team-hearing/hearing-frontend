@@ -22,22 +22,37 @@ export default function DetailPage({ params }: { params: { id: string } }) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
     const handleWheel = (e: WheelEvent) => {
-      if (scrollContainerRef.current) {
-        e.preventDefault();
-        scrollContainerRef.current.scrollLeft += e.deltaY;
+      e.preventDefault(); 
+
+    
+      const scrollLeft = container.scrollLeft;
+     
+      const pageWidth = container.clientWidth;
+
+      // 휠 방향에 따라 스크롤 이동
+      if (e.deltaY > 0) {
+        // 아래로 스크롤 (다음 페이지)
+        container.scrollTo({
+          left: scrollLeft + pageWidth,
+          behavior: "smooth",
+        });
+      } else if (e.deltaY < 0) {
+        // 위로 스크롤 (이전 페이지)
+        container.scrollTo({
+          left: scrollLeft - pageWidth,
+          behavior: "smooth",
+        });
       }
     };
 
-    const scrollContainer = scrollContainerRef.current;
-    if (scrollContainer) {
-      scrollContainer.addEventListener("wheel", handleWheel, { passive: false });
-    }
+    container.addEventListener("wheel", handleWheel, { passive: false });
 
     return () => {
-      if (scrollContainer) {
-        scrollContainer.removeEventListener("wheel", handleWheel);
-      }
+      container.removeEventListener("wheel", handleWheel);
     };
   }, []);
 
@@ -48,10 +63,10 @@ export default function DetailPage({ params }: { params: { id: string } }) {
   return (
     <div className="min-h-screen bg-white">
       {/* 닫기 버튼 */}
-      <div className="fixed top-0 left-0 p-6 z-10">
+      <div className="fixed top-0 right-0 md:left-0 lg:left-0 p-6 z-20">
         <Link href="/timeline" className="inline-block">
-          <div className="w-8 h-8 rounded-full border border-black flex items-center justify-center">
-            <X size={18} />
+          <div className="w-10 h-10 rounded-full border border-black flex items-center justify-center bg-white shadow-sm">
+            <X size={20} />
           </div>
         </Link>
       </div>
@@ -61,29 +76,37 @@ export default function DetailPage({ params }: { params: { id: string } }) {
         ref={scrollContainerRef}
         className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth h-screen"
       >
-        {/* 1 페이지 */}
-        <div className="min-w-full md:min-w-screen h-screen flex items-center snap-start px-4 md:px-16 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-            <div>
-              <h1 className="text-4xl md:text-7xl font-bold mb-6">{post.title}</h1>
-              <p className="text-base md:text-xl mb-16">{post.content}</p>
-              <p className="text-base md:text-xl mb-16">{post.content2}</p>
-            </div>
-            <div className="space-y-6">
-              <div className="bg-gray-light aspect-video flex items-center justify-center">
-                
-              </div>
-              <div className="bg-gray-light aspect-video flex items-center justify-center">
-                
-              </div>
-            </div>
-          </div>
-        </div>
-
+       {/* 1 페이지 */}
+       <div className="min-w-full w-screen h-screen flex items-start snap-start px-4 md:px-16 lg:px-24 pt-20 md:pt-16 pb-8 md:pb-16">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 w-full max-w-screen-2xl mx-auto">
+    <div>
+      <h1 className="text-4xl lg:text-7xl font-bold mb-6">{post.title}</h1>
+      <p className="text-base lg:text-xl mb-16">{post.content}</p>
+      <p className="text-base lg:text-xl mb-16">{post.content2}</p>
+    </div>
+    <div className="space-y-6">
+      <div className="bg-gray-200 aspect-video flex items-center justify-center">
+        <img
+          src={post.images[0]}
+          alt="Image 1"
+          className="object-cover w-full h-full"
+        />
+      </div>
+      <div className="bg-gray-200 aspect-video flex items-center justify-center">
+        <img
+          src={post.images[0]}
+          alt="Image 2"
+          className="object-cover w-full h-full"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+       
         {/* 2 페이지 */}
-        <div className="min-w-full md:min-w-screen h-screen flex items-center snap-start px-4 md:px-16 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-            <div className="grid grid-cols-2 gap-4">
+        <div className="min-w-full w-screen h-screen flex items-start snap-start px-4 md:px-16 lg:px-24 pt-20 md:pt-16 pb-8 md:pb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-screen-2xl mx-auto">
+            <div className="grid grid-cols-2 gap-6">
               <div className="bg-gray-light aspect-square flex items-center justify-center">
                 <img
                   src={post.images[0]}
@@ -114,15 +137,15 @@ export default function DetailPage({ params }: { params: { id: string } }) {
               </div>
             </div>
             <div className="space-y-6">
-              <p className="text-base md:text-xl">{post.content}</p>
-              <p className="text-base md:text-xl">{post.content}</p>
+              <p className="text-base md:text-xl">{post.content2}</p>
+              <p className="text-base md:text-xl">{post.content2}</p>
             </div>
           </div>
         </div>
 
         {/* 3 페이지 */}
-        <div className="min-w-full md:min-w-screen h-screen flex items-center snap-start px-4 md:px-16 py-8">
-          <div className="w-full">
+        <div className="min-w-full w-screen h-screen flex items-start snap-start px-4 md:px-16 lg:px-24 pt-20 md:pt-16 pb-8 md:pb-16">
+          <div className="w-full max-w-screen-2xl mx-auto">
             <blockquote className="text-2xl md:text-4xl font-medium mb-8 md:mb-16">
               " Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
             </blockquote>
