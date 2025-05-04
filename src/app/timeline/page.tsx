@@ -45,7 +45,7 @@ export default function Timeline() {
         </div>
         
         {/* 스크롤바 영역*/}
-        <div className="h-12 px-12 mt-auto"></div>
+        <div className="h-12 px-12 mt-auto rounded-lg"></div>
       </div>
     </div>
   );
