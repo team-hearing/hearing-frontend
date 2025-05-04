@@ -77,12 +77,12 @@ export default function DetailPage({ params }: { params: { id: string } }) {
         className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth h-screen"
       >
        {/* 1 페이지 */}
-       <div className="min-w-full w-screen h-screen flex items-start snap-start px-4 md:px-16 lg:px-24 pt-20 md:pt-16 pb-8 md:pb-16">
+       <div className="min-w-full w-screen h-screen flex items-center snap-start px-4 md:px-16 lg:px-24 py-8 md:py-12">
   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 w-full max-w-screen-2xl mx-auto">
     <div>
       <h1 className="text-4xl lg:text-7xl font-bold mb-6">{post.title}</h1>
-      <p className="text-base lg:text-xl mb-16">{post.content}</p>
-      <p className="text-base lg:text-xl mb-16">{post.content2}</p>
+      <p className="text-base lg:text-xl mb-8">{post.content}</p>
+      <p className="text-base lg:text-xl mb-8">{post.content2}</p>
     </div>
     <div className="space-y-6">
       <div className="bg-gray-200 aspect-video flex items-center justify-center">
@@ -104,7 +104,7 @@ export default function DetailPage({ params }: { params: { id: string } }) {
 </div>
        
         {/* 2 페이지 */}
-        <div className="min-w-full w-screen h-screen flex items-start snap-start px-4 md:px-16 lg:px-24 pt-20 md:pt-16 pb-8 md:pb-16">
+        <div className="min-w-full w-screen h-screen flex items-center snap-start px-4 md:px-16 lg:px-24 py-8 md:py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-screen-2xl mx-auto">
             <div className="grid grid-cols-2 gap-6">
               <div className="bg-gray-light aspect-square flex items-center justify-center">
