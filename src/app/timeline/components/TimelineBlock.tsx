@@ -1,5 +1,8 @@
 // 타임라인 데이터 타입 정의
+import Link from 'next/link';
+
 export type Event = {
+  id: number;
   date: string;
   title: string;
 };
@@ -17,9 +20,13 @@ const TimelineBlock = ({ data }: { data: TimelineData }) => {
       <div className="relative mb-24 w-full">
         {/* 이미지 */}
         <div className="pl-28">
-          <div className="w-32 h-40 bg-gray-light flex items-center justify-center text-sm text-gray-500 mb-2">
-            이미지
-          </div>
+          {data.events[0] && (
+            <Link href={`/timeline/${data.events[0].id}`}>
+              <div className="w-32 h-40 bg-gray-light flex items-center justify-center text-sm text-gray-500 mb-2 cursor-pointer hover:opacity-80 transition-opacity">
+                이미지
+              </div>
+            </Link>
+          )}
         </div>
 
         {/* 제목/날짜 */}
