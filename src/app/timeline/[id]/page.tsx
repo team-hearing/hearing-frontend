@@ -144,18 +144,19 @@ export default function DetailPage({ params }: { params: { id: string } }) {
         </div>
 
         {/* 3 페이지 */}
-        <div className="min-w-full w-screen h-screen flex items-start snap-start px-4 md:px-16 lg:px-24 pt-20 md:pt-16 pb-8 md:pb-16">
-          <div className="w-full max-w-screen-2xl mx-auto">
-            <blockquote className="text-2xl md:text-4xl font-medium mb-8 md:mb-16">
+        <div className="min-w-full w-screen h-screen flex items-center justify-center snap-start px-4 md:px-16 lg:px-24 py-8 md:py-12">
+          <div className="w-full max-w-screen-xl mx-auto">
+            <blockquote className="text-2xl md:text-4xl lg:text-5xl font-medium mb-12 md:mb-20 px-4 text-left">
               " Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
             </blockquote>
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-2">
+            <div className="mt-24 text-left">
+              <h2 className="text-2xl md:text-3xl font-bold mb-3">
                 {post.author}
               </h2>
-              <p className="text-base md:text-xl mb-6">{post.authorDesc}</p>
+              <p className="text-base md:text-xl mb-8">{post.authorDesc}</p>
+              
               <div className="mb-8">
-                <h3 className="font-medium mb-2">저작권 표시</h3>
+                <h3 className="font-medium mb-3">저작권 표시</h3>
                 <ul className="list-disc ml-6">
                   {post.authorInfo.map((info, index) => (
                     <li key={index} className="text-base md:text-xl">
