@@ -18,24 +18,27 @@ const TimelineBlock = ({ data }: { data: TimelineData }) => {
     <div className="flex flex-col items-start w-full">
       {/* 상단 영역 */}
       <div className="relative mb-24 w-full">
-        {/* 이미지 */}
+        {/* 연도별 이벤트 목록 */}
         <div className="pl-28">
-          {data.events[0] && (
-            <Link href={`/timeline/${data.events[0].id}`}>
-              <div className="w-32 h-40 bg-gray-light flex items-center justify-center text-sm text-gray-500 mb-2 cursor-pointer hover:opacity-80 transition-opacity">
-                이미지
-              </div>
-            </Link>
-          )}
-        </div>
+          <div className="flex flex-row gap-6 overflow-x-auto">
+            {data.events.map((event) => (
+              <div key={event.id} className="min-w-[130px] max-w-[180px]">
+                {/* 이미지 */}
+                <Link href={`/timeline/${event.id}`}>
+                  <div className="w-32 h-40 bg-gray-light flex items-center justify-center text-sm text-gray-500 mb-2 cursor-pointer hover:opacity-80 transition-opacity">
+                    이미지
+                  </div>
+                </Link>
 
-        {/* 제목/날짜 */}
-        {data.events[0] && (
-          <div className="pl-28 text-start mb-4">
-            <p className="text-sm font-regular">{data.events[0].date}</p>
-            <p className="text-sm font-bold">{data.events[0].title}</p>
+                {/* 제목/날짜 */}
+                <div className="text-start mb-4">
+                  <p className="text-sm font-regular">{event.date}</p>
+                  <p className="text-sm font-bold truncate">{event.title}</p>
+                </div>
+              </div>
+            ))}
           </div>
-        )}
+        </div>
 
         {/* 연도 마커 */}
         <div className="absolute left-8 top-[244px] z-10">
