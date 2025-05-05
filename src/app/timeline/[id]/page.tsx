@@ -20,7 +20,7 @@ export default function DetailPage({ params }: {
     author: "말한 사람",
     authorDesc: "짧은 설명",
     authorInfo: ["00기관", "00기관"],
-    images: ["/image1.jpg", "/image2.jpg", "/image3.jpg", "/image4.jpg"],
+    images: ["/image1.jpg", "/image2.jpg", "/image3.jpg", "/image4.jpg", "/image5.jpg", "/image6.jpg", "/image7.jpg", "/image8.jpg"],
   };
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -31,10 +31,8 @@ export default function DetailPage({ params }: {
 
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault(); 
-
     
       const scrollLeft = container.scrollLeft;
-     
       const pageWidth = container.clientWidth;
 
       // 휠 방향에 따라 스크롤 이동
@@ -80,32 +78,32 @@ export default function DetailPage({ params }: {
         ref={scrollContainerRef}
         className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth h-screen"
       >
-       {/* 1 페이지 */}
-       <div className="min-w-full w-screen h-screen flex items-center snap-start px-4 md:px-16 lg:px-24 py-8 md:py-12">
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 w-full max-w-screen-2xl mx-auto">
-    <div>
-      <h1 className="text-4xl lg:text-7xl font-bold mb-6">{post.title}</h1>
-      <p className="text-base lg:text-xl mb-8">{post.content}</p>
-      <p className="text-base lg:text-xl mb-8">{post.content2}</p>
-    </div>
-    <div className="space-y-6">
-      <div className="bg-gray-200 aspect-video flex items-center justify-center">
-        <img
-          src={post.images[0]}
-          alt="Image 1"
-          className="object-cover w-full h-full"
-        />
-      </div>
-      <div className="bg-gray-200 aspect-video flex items-center justify-center">
-        <img
-          src={post.images[0]}
-          alt="Image 2"
-          className="object-cover w-full h-full"
-        />
-      </div>
-    </div>
-  </div>
-</div>
+        {/* 1 페이지 */}
+        <div className="min-w-full w-screen h-screen flex items-center snap-start px-4 md:px-16 lg:px-24 py-8 md:py-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 w-full max-w-screen-2xl mx-auto">
+            <div>
+              <h1 className="text-4xl lg:text-7xl font-bold mb-6">{post.title}</h1>
+              <p className="text-base lg:text-xl mb-8">{post.content}</p>
+              <p className="text-base lg:text-xl mb-8">{post.content2}</p>
+            </div>
+            <div className="space-y-6">
+              <div className="bg-gray-light aspect-video flex items-center justify-center">
+                <img
+                  src={post.images[1]}
+                  alt="Image1"
+                  className="object-cover w-full h-full"
+                />
+              </div>
+              <div className="bg-gray-light aspect-video flex items-center justify-center">
+                <img
+                  src={post.images[2]}
+                  alt="Image2"
+                  className="object-cover w-full h-full"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
        
         {/* 2 페이지 */}
         <div className="min-w-full w-screen h-screen flex items-center snap-start px-4 md:px-16 lg:px-24 py-8 md:py-12">
@@ -113,29 +111,29 @@ export default function DetailPage({ params }: {
             <div className="grid grid-cols-2 gap-6">
               <div className="bg-gray-light aspect-square flex items-center justify-center">
                 <img
-                  src={post.images[0]}
-                  alt="Image 1"
-                  className="object-cover w-full h-full"
-                />
-              </div>
-              <div className="bg-gray-light aspect-square flex items-center justify-center">
-                <img
-                  src={post.images[1]}
-                  alt="Image 2"
-                  className="object-cover w-full h-full"
-                />
-              </div>
-              <div className="bg-gray-light aspect-square flex items-center justify-center">
-                <img
-                  src={post.images[2]}
-                  alt="Image 3"
-                  className="object-cover w-full h-full"
-                />
-              </div>
-              <div className="bg-gray-light aspect-square flex items-center justify-center">
-                <img
                   src={post.images[3]}
-                  alt="Image 4"
+                  alt="Image3"
+                  className="object-cover w-full h-full"
+                />
+              </div>
+              <div className="bg-gray-light aspect-square flex items-center justify-center">
+                <img
+                  src={post.images[4]}
+                  alt="Image4"
+                  className="object-cover w-full h-full"
+                />
+              </div>
+              <div className="bg-gray-light aspect-square flex items-center justify-center">
+                <img
+                  src={post.images[5]}
+                  alt="Image5"
+                  className="object-cover w-full h-full"
+                />
+              </div>
+              <div className="bg-gray-light aspect-square flex items-center justify-center">
+                <img
+                  src={post.images[6]}
+                  alt="Image6"
                   className="object-cover w-full h-full"
                 />
               </div>
@@ -157,17 +155,37 @@ export default function DetailPage({ params }: {
               <h2 className="text-2xl md:text-3xl font-bold mb-3">
                 {post.author}
               </h2>
-              <p className="text-base md:text-xl mb-8">{post.authorDesc}</p>
+              <p className="text-base md:text-xl mb-24">{post.authorDesc}</p>
               
               <div className="mb-8">
-                <h3 className="font-medium mb-3">저작권 표시</h3>
-                <ul className="list-disc ml-6">
-                  {post.authorInfo.map((info, index) => (
-                    <li key={index} className="text-base md:text-xl">
-                      {info}
-                    </li>
-                  ))}
-                </ul>
+                <div className="flex flex-col lg:flex-row justify-between items-start gap-6">
+                  <div className="flex-1 order-1 lg:order-none">
+                    <h3 className="font-medium mb-3">저작권 표시</h3>
+                    <ul className="list-disc ml-6">
+                      {post.authorInfo.map((info, index) => (
+                        <li key={index} className="text-base md:text-xl">
+                          {info}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1 w-full max-w-md order-2 lg:order-none">
+                    <div className="bg-gray-light aspect-square overflow-hidden w-42 h-52">
+                      <img
+                        src={post.images[6]}
+                        alt="Image7"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="bg-gray-light aspect-square overflow-hidden w-42 h-52">
+                      <img
+                        src={post.images[7]}
+                        alt="Image8"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
