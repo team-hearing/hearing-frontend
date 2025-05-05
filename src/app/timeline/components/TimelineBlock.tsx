@@ -31,10 +31,12 @@ const TimelineBlock = ({ data }: { data: TimelineData }) => {
                 </Link>
 
                 {/* 제목/날짜 */}
-                <div className="text-start mb-4">
+                <Link href={`/timeline/${event.date}`}>
+                <div className="text-start mb-4 cursor-pointer hover:opacity-80 transition-opacity">
                   <p className="text-sm font-regular">{event.date}</p>
                   <p className="text-sm font-bold truncate">{event.title}</p>
                 </div>
+                </Link>
               </div>
             ))}
           </div>
