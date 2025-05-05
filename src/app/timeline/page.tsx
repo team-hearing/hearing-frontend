@@ -1,17 +1,41 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import TimelineBlock from "./components/TimelineBlock";
 import { timelineData } from "./components/timelineData";
 
 export default function Timeline() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const handleWheel = (e: React.WheelEvent) => {
-    if (scrollRef.current) {
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
-      scrollRef.current.scrollLeft += e.deltaY;
-    }
-  };
+      const scrollLeft = container.scrollLeft;
+      const pageWidth = container.clientWidth;
+
+      if (e.deltaY > 0) {
+        // 다음 페이지 스크롤 
+        container.scrollTo({
+          left: scrollLeft + pageWidth,
+          behavior: "smooth",
+        });
+      } else if (e.deltaY < 0) {
+        // 이전 페이지 스크롤 
+        container.scrollTo({
+          left: scrollLeft - pageWidth,
+          behavior: "smooth",
+        });
+      }
+    };
+
+    container.addEventListener("wheel", handleWheel, { passive: false });
+
+    return () => {
+      container.removeEventListener("wheel", handleWheel);
+    };
+  }, []);
 
   return (
     <div className="w-full h-screen flex flex-col bg-white">
@@ -22,17 +46,16 @@ export default function Timeline() {
         <h1 className="text-3xl font-bold tracking-widest">H E A R I N G</h1>
       </div>
       
-      {/* 타임라인 컨텐츠 영역*/}
+      {/* 타임라인 컨텐츠 영역 */}
       <div className="flex-grow flex flex-col relative">
         {/* 타임라인 선 */}
         <div className="absolute left-0 top-[408px] w-full h-1 bg-primary z-0" />
         
-        {/* 컨텐츠 영역 - 위쪽 여백*/}
+        {/* 컨텐츠 영역 - 위쪽 여백 */}
         <div className="flex-grow pt-32 px-12">
           <div
             ref={scrollRef}
             className="overflow-x-auto h-full snap-x snap-mandatory scroll-smooth scrollbar-thin scrollbar-thumb-primary scrollbar-track-gray-100 scrollbar-thumb-rounded-b-lg"
-            onWheel={handleWheel}
           >
             <div className="flex gap-60 min-w-max relative z-10">
               {timelineData.map((block) => (
@@ -44,7 +67,7 @@ export default function Timeline() {
           </div>
         </div>
         
-        {/* 스크롤바 영역*/}
+        {/* 스크롤바 영역 */}
         <div className="h-12 px-12 mt-auto rounded-lg"></div>
       </div>
     </div>
