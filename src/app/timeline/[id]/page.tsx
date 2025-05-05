@@ -4,10 +4,14 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { X } from "lucide-react";
 import { useRef, useEffect } from "react";
+import { use } from "react";
 
-export default function DetailPage({ params }: { params: { id: string } }) {
+export default function DetailPage({ params }: { 
+  params: Promise<{ id: string }> 
+}) {
+  const resolvedParams = use(params);
   const post = {
-    id: Number(params.id),
+    id: Number(resolvedParams.id),
     title: "Head",
     content:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt",
