@@ -50,6 +50,11 @@ export default function Timeline() {
       setCurrentYear(timelineData[currentIndex].year);
     }
   };
+  
+  // 모바일 타임라인에서 연도 변경 핸들러
+  const handleMobileYearChange = (year: number) => {
+    setCurrentYear(year);
+  };
 
   // 커스텀 스크롤 훅 사용
   const scrollRef = useHorizontalScroll({
@@ -63,11 +68,11 @@ export default function Timeline() {
       </div>
      
       {/* 타이틀 영역 */}
-      <TimelineTitle currentYear={isMobile ? undefined : currentYear} />
+      <TimelineTitle currentYear={currentYear} />
       
       {/* 모바일 타임라인 */}
       <div className={`md:hidden ${isMobile ? 'block' : 'hidden'} overflow-y-auto flex-grow`}>
-        <MobileTimeline />
+        <MobileTimeline onYearChange={handleMobileYearChange} />
       </div>
       
       {/* 데스크톱 타임라인 */}

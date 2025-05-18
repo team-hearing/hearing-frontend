@@ -17,18 +17,18 @@ export default function TimelineTitle({
   };
 
   return (
-    <div className="p-10 px-12">
-      <div className="w-full h-px bg-gray-dark mb-4" />
+    <div className="p-8 sm:p-10 px-8 sm:px-12">
+      <div className="w-full h-px bg-gray-dark mb-3 sm:mb-4" />
       
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-end">
         <div>
-          <h2 className="text-lg font-medium">{subtitle}</h2>
-          <h1 className="text-3xl font-bold tracking-widest">{title}</h1>
+          <h2 className="text-body sm:text-h6 font-regular">{subtitle}</h2>
+          <h1 className="text-h5 sm:text-h4 font-bold tracking-widest">{title}</h1>
         </div>
         
         {currentYear && (
           <div className="flex items-end">
-            <span className="text-2xl font-bold text-primary hidden sm:block navigation-year">
+            <span className="text-h6 sm:text-h5 font-bold text-primary navigation-year">
               {getDecade(currentYear)}
             </span>
           </div>
