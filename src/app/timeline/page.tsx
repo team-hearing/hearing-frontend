@@ -2,7 +2,7 @@
 import { useRef, useEffect } from "react";
 import TimelineBlock from "./components/TimelineBlock";
 import { timelineData } from "./components/timelineData";
-import Navigation from "./components/Navigation";
+import Navigation from "../components/Navigation";
 
 export default function Timeline() {
   const scrollRef = useRef<HTMLDivElement>(null);

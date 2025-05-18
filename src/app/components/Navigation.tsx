@@ -3,9 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -31,26 +33,33 @@ const Navigation = () => {
           <div className="absolute w-full top-16 left-0 right-0 bg-white shadow-lg z-50">
             <div className="flex flex-col p-4 gap-4">
               <Link
-                href="/"
-                className="text-gray-600 hover:text-primary text-base font-medium transition-colors block"
+                href="/about"
+                className={`text-base font-medium transition-colors block ${
+                  pathname === "/about" ? "text-primary" : "text-gray-600 hover:text-primary"
+                }`}
                 onClick={toggleMenu}
               >
-                About
+                About Us
               </Link>
               <Link
                 href="/notice"
-                className="text-gray-600 hover:text-primary text-base font-medium transition-colors block"
+                className={`text-base font-medium transition-colors block ${
+                  pathname.startsWith("/notice") ? "text-primary" : "text-gray-600 hover:text-primary"
+                }`}
                 onClick={toggleMenu}
               >
                 공지사항
               </Link>
               <Link
                 href="/updates"
-                className="text-gray-600 hover:text-primary text-base font-medium transition-colors block"
+                className={`text-base font-medium transition-colors block ${
+                  pathname === "/updates" ? "text-primary" : "text-gray-600 hover:text-primary"
+                }`}
                 onClick={toggleMenu}
               >
                 업데이트
               </Link>
+            
             </div>
           </div>
         )}
@@ -59,4 +68,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default Navigation; 
