@@ -8,8 +8,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#00B493",
-        secondary: "#F8496C",
+        primary: "#323232", // "#00B493" 주석 처리된 원래 색상
+        secondary: "#9E978D", // "#F8496C"
         black: "#000000", 
         white: "#FFFFFF",
         gray: {
