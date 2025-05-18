@@ -1,15 +1,34 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TimelineBlock from "./components/TimelineBlock";
 import { timelineData } from "./components/timelineData";
 import Navigation from "../components/Navigation";
 import TimelineTitle from "./components/TimelineTitle";
 import useHorizontalScroll from "./hooks/useHorizontalScroll";
+import MobileTimeline from "./components/MobileTimeline";
 
 export default function Timeline() {
   const [currentYear, setCurrentYear] = useState<number | undefined>(
     timelineData.length > 0 ? timelineData[0].year : undefined
   );
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // 화면 크기에 따른 모바일 여부 감지
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // md 브레이크포인트
+    };
+    
+    // 초기 체크
+    checkMobile();
+    
+    // 리사이즈 이벤트 리스너
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
   
   // 스크롤 이벤트 핸들러 - 현재 보이는 연도 감지
   const handleScroll = (container: HTMLDivElement) => {
@@ -44,10 +63,15 @@ export default function Timeline() {
       </div>
      
       {/* 타이틀 영역 */}
-      <TimelineTitle currentYear={currentYear} />
+      <TimelineTitle currentYear={isMobile ? undefined : currentYear} />
       
-      {/* 타임라인 컨텐츠 영역 */}
-      <div className="flex-grow flex flex-col relative">
+      {/* 모바일 타임라인 */}
+      <div className={`md:hidden ${isMobile ? 'block' : 'hidden'} overflow-y-auto flex-grow`}>
+        <MobileTimeline />
+      </div>
+      
+      {/* 데스크톱 타임라인 */}
+      <div className={`${isMobile ? 'hidden' : 'block'} md:block flex-grow flex flex-col relative`}>
         {/* 타임라인 선 */}
         <div className="absolute left-0 top-[408px] w-full h-1 bg-primary z-0" />
         

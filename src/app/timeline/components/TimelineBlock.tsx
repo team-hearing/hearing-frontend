@@ -5,6 +5,7 @@ export type Event = {
   id: number;
   date: string;
   title: string;
+  tags?: string[];
 };
 
 export type TimelineData = {

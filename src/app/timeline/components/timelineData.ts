@@ -1,32 +1,39 @@
 import { TimelineData } from "./TimelineBlock";
 
+export type Event = {
+  id: number;
+  date: string;
+  title: string;
+  tags?: string[];
+};
+
 export const timelineData: TimelineData[] = [
   {
     year: 2025,
     events: [
-      { id: 1, date: "04.04", title: "윤석열 파면" }
+      { id: 1, date: "04.04", title: "윤석열 파면", tags: ["정치", "한국"] }
     ]
   },
   {
     year: 2024,
     events: [
-      { id: 2, date: "12.03", title: "12.3 비상계엄 선포" },
-      { id: 3, date: "10.10", title: "한강 작가 노벨상 수상" },
-      { id: 4, date: "05~08", title: "서울대 N번방 사건" },
-      { id: 5, date: "02.19", title: "전공의 파업" }
+      { id: 2, date: "12.03", title: "12.3 비상계엄 선포", tags: ["정치", "안보"] },
+      { id: 3, date: "10.10", title: "한강 작가 노벨상 수상", tags: ["문화", "문학"] },
+      { id: 4, date: "05~08", title: "서울대 N번방 사건", tags: ["사회", "범죄"] },
+      { id: 5, date: "02.19", title: "전공의 파업", tags: ["의료", "사회"] }
     ]
   },
   {
     year: 2023,
     events: [
-      { id: 6, date: "07.18", title: "서울서이초 교사 사망 사건" }
+      { id: 6, date: "07.18", title: "서울서이초 교사 사망 사건", tags: ["교육", "사회"] }
     ]
   },
   {
     year: 2022,
     events: [
-      { id: 7, date: "10.29", title: "이태원 참사 발생" },
-      { id: 8, date: "05.10", title: "윤석열 대통령 취임" }
+      { id: 7, date: "10.29", title: "이태원 참사 발생", tags: ["사회", "재난"] },
+      { id: 8, date: "05.10", title: "윤석열 대통령 취임", tags: ["정치", "한국"] }
     ]
   },
   {
@@ -46,7 +53,7 @@ export const timelineData: TimelineData[] = [
     year: 2018,
     events: [
       { id: 12, date: "04.27", title: "3차 남북정상회담" },
-      { id: 13, date: "", title: "텔레그램 N번방 사건" }
+      { id: 13, date: "2017~2018", title: "텔레그램 N번방 사건" }
     ]
   },
   {
