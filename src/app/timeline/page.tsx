@@ -1,42 +1,12 @@
 "use client";
-import { useRef, useEffect } from "react";
 import TimelineBlock from "./components/TimelineBlock";
 import { timelineData } from "./components/timelineData";
 import Navigation from "../components/Navigation";
+import TimelineTitle from "./components/TimelineTitle";
+import useHorizontalScroll from "./hooks/useHorizontalScroll";
 
 export default function Timeline() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const container = scrollRef.current;
-    if (!container) return;
-
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      const scrollLeft = container.scrollLeft;
-      const pageWidth = container.clientWidth;
-
-      if (e.deltaY > 0) {
-        // 다음 페이지 스크롤 
-        container.scrollTo({
-          left: scrollLeft + pageWidth,
-          behavior: "smooth",
-        });
-      } else if (e.deltaY < 0) {
-        // 이전 페이지 스크롤 
-        container.scrollTo({
-          left: scrollLeft - pageWidth,
-          behavior: "smooth",
-        });
-      }
-    };
-
-    container.addEventListener("wheel", handleWheel, { passive: false });
-
-    return () => {
-      container.removeEventListener("wheel", handleWheel);
-    };
-  }, []);
+  const scrollRef = useHorizontalScroll();
 
   return (
     <div className="w-full h-screen flex flex-col bg-white">
@@ -45,14 +15,8 @@ export default function Timeline() {
       </div>
      
       {/* 타이틀 영역 */}
-      <div className="p-10 px-12">
-        <div className="w-full h-px bg-gray-dark mb-4" />
-        <h2 className="text-lg font-medium">역사를 듣다.</h2>
-        <h1 className="text-3xl font-bold tracking-widest">H E A R I N G</h1>
-      </div>
+      <TimelineTitle />
       
-     
-
       {/* 타임라인 컨텐츠 영역 */}
       <div className="flex-grow flex flex-col relative">
         {/* 타임라인 선 */}

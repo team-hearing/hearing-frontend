@@ -18,7 +18,7 @@ export default function NoticeDetailPage() {
 
   return (
     <div className="w-full h-screen flex flex-col bg-white">
-      <div className="relative w-full">
+      <div className="relative w-full justify-items-start">
         <Navigation />
       </div>
       

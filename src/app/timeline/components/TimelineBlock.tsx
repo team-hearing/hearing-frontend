@@ -31,7 +31,7 @@ const TimelineBlock = ({ data }: { data: TimelineData }) => {
                 </Link>
 
                 {/* 제목/날짜 */}
-                <Link href={`/timeline/${event.date}`}>
+                <Link href={`/timeline/${event.id}`}>
                 <div className="text-start mb-4 cursor-pointer hover:opacity-80 transition-opacity">
                   <p className="text-sm font-regular">{event.date}</p>
                   <p className="text-sm font-bold truncate">{event.title}</p>
