@@ -7,7 +7,6 @@ interface GalleryPageProps {
 
 // 상세 페이지의 2페이지
  
-
 export default function GalleryPage({ content, images }: GalleryPageProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 w-full max-w-screen-2xl mx-auto px-2">

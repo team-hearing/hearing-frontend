@@ -7,9 +7,9 @@ interface QuotePageProps {
   images: string[];
 }
 
-/**
- * 이벤트 상세 페이지의 세 번째 인용구 페이지
- */
+// 상세 페이지 3페이지
+
+
 export default function QuotePage({ author, authorDesc, authorInfo, images }: QuotePageProps) {
   return (
     <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6">
