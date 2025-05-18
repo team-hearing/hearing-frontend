@@ -7,9 +7,8 @@ interface IntroPageProps {
   images: string[];
 }
 
-/**
- * 이벤트 상세 페이지의 첫 번째 소개 페이지
- */
+// 상세 페이지의 1페이지
+ 
 export default function IntroPage({ title, content, content2, images }: IntroPageProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 w-full max-w-screen-2xl mx-auto">
