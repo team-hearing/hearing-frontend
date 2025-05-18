@@ -1,6 +1,10 @@
 import { useRef, useEffect } from "react";
 
-export default function useHorizontalScroll() {
+interface HorizontalScrollOptions {
+  onScroll?: (container: HTMLDivElement) => void;
+}
+
+export default function useHorizontalScroll(options: HorizontalScrollOptions = {}) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -27,12 +31,20 @@ export default function useHorizontalScroll() {
       }
     };
 
+    const handleScroll = () => {
+      if (options.onScroll) {
+        options.onScroll(container);
+      }
+    };
+
     container.addEventListener("wheel", handleWheel, { passive: false });
+    container.addEventListener("scroll", handleScroll);
 
     return () => {
       container.removeEventListener("wheel", handleWheel);
+      container.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [options]);
 
   return scrollRef;
 } 

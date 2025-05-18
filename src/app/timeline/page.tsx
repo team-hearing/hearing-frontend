@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import TimelineBlock from "./components/TimelineBlock";
 import { timelineData } from "./components/timelineData";
 import Navigation from "../components/Navigation";
@@ -6,7 +7,35 @@ import TimelineTitle from "./components/TimelineTitle";
 import useHorizontalScroll from "./hooks/useHorizontalScroll";
 
 export default function Timeline() {
-  const scrollRef = useHorizontalScroll();
+  const [currentYear, setCurrentYear] = useState<number | undefined>(
+    timelineData.length > 0 ? timelineData[0].year : undefined
+  );
+  
+  // 스크롤 이벤트 핸들러 - 현재 보이는 연도 감지
+  const handleScroll = (container: HTMLDivElement) => {
+    const blockElements = container.querySelectorAll(".snap-start");
+    if (blockElements.length === 0) return;
+
+    // 각 블록의 위치를 검사하여 현재 보이는 블록 찾기
+    let currentIndex = 0;
+    blockElements.forEach((block, index) => {
+      const blockLeft = (block as HTMLElement).offsetLeft;
+      // 화면 중앙에 가장 가까운 블록 찾기
+      if (blockLeft - container.scrollLeft < container.clientWidth / 2) {
+        currentIndex = index;
+      }
+    });
+
+    // 현재 연도 업데이트
+    if (currentIndex >= 0 && currentIndex < timelineData.length) {
+      setCurrentYear(timelineData[currentIndex].year);
+    }
+  };
+
+  // 커스텀 스크롤 훅 사용
+  const scrollRef = useHorizontalScroll({
+    onScroll: handleScroll
+  });
 
   return (
     <div className="w-full h-screen flex flex-col bg-white">
@@ -15,7 +44,7 @@ export default function Timeline() {
       </div>
      
       {/* 타이틀 영역 */}
-      <TimelineTitle />
+      <TimelineTitle currentYear={currentYear} />
       
       {/* 타임라인 컨텐츠 영역 */}
       <div className="flex-grow flex flex-col relative">
@@ -30,7 +59,7 @@ export default function Timeline() {
           >
             <div className="flex gap-60 min-w-max relative z-10">
               {timelineData.map((block) => (
-                <div key={block.year} className="snap-start scroll-mx-12">
+                <div key={block.year} className="snap-start scroll-mx-12" data-year={block.year}>
                   <TimelineBlock data={block} />
                 </div>
               ))}
