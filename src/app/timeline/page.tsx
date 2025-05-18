@@ -2,6 +2,7 @@
 import { useRef, useEffect } from "react";
 import TimelineBlock from "./components/TimelineBlock";
 import { timelineData } from "./components/timelineData";
+import Navigation from "./components/Navigation";
 
 export default function Timeline() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -39,6 +40,10 @@ export default function Timeline() {
 
   return (
     <div className="w-full h-screen flex flex-col bg-white">
+      <div className="relative w-full justify-items-start">
+        <Navigation />
+      </div>
+     
       {/* 타이틀 영역 */}
       <div className="p-10 px-12">
         <div className="w-full h-px bg-gray-dark mb-4" />
@@ -46,6 +51,8 @@ export default function Timeline() {
         <h1 className="text-3xl font-bold tracking-widest">H E A R I N G</h1>
       </div>
       
+     
+
       {/* 타임라인 컨텐츠 영역 */}
       <div className="flex-grow flex flex-col relative">
         {/* 타임라인 선 */}
