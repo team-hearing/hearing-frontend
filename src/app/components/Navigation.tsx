@@ -30,12 +30,12 @@ const Navigation = () => {
 
         {/* Dropdown Menu */}
         {isMenuOpen && (
-          <div className="absolute w-full top-16 left-0 right-0 bg-white shadow-lg z-50">
-            <div className="flex flex-col p-4 gap-4">
+          <div className="absolute top-16 left-4 sm:left-6 lg:left-8 w-64 bg-white shadow-lg rounded-lg border z-50">
+            <div className="flex flex-col py-2">
               <Link
                 href="/about"
-                className={`text-base font-medium transition-colors block ${
-                  pathname === "/about" ? "text-primary" : "text-gray-600 hover:text-primary"
+                className={`px-4 py-3 text-base font-medium transition-colors hover:bg-gray-light ${
+                  pathname === "/about" ? "text-primary" : "text-gray-dark hover:text-primary"
                 }`}
                 onClick={toggleMenu}
               >
@@ -43,8 +43,8 @@ const Navigation = () => {
               </Link>
               <Link
                 href="/notice"
-                className={`text-base font-medium transition-colors block ${
-                  pathname.startsWith("/notice") ? "text-primary" : "text-gray-600 hover:text-primary"
+                className={`px-4 py-3 text-base font-medium transition-colors hover:bg-gray-light ${
+                  pathname.startsWith("/notice") ? "text-primary" : "text-gray-dark hover:text-primary"
                 }`}
                 onClick={toggleMenu}
               >
@@ -52,14 +52,13 @@ const Navigation = () => {
               </Link>
               <Link
                 href="/updates"
-                className={`text-base font-medium transition-colors block ${
-                  pathname === "/updates" ? "text-primary" : "text-gray-600 hover:text-primary"
+                className={`px-4 py-3 text-base font-medium transition-colors hover:bg-gray-light ${
+                  pathname === "/updates" ? "text-primary" : "text-gray-dark hover:text-primary"
                 }`}
                 onClick={toggleMenu}
               >
                 업데이트
               </Link>
-            
             </div>
           </div>
         )}
