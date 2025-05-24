@@ -23,7 +23,7 @@ export default function TimelineTitle({
       <div className="flex justify-between items-end">
         <div>
           <h2 className="text-body sm:text-h6 font-regular">{subtitle}</h2>
-          <h1 className="text-h5 sm:text-h4 font-bold tracking-widest">{title}</h1>
+          <h1 className="text-h5 sm:text-h4 font-bold text-gray-dark tracking-widest">{title}</h1>
         </div>
         
         {currentYear && (
