@@ -17,16 +17,16 @@ export default function NoticePage() {
         <Navigation />
       </div>
       
-      <div className="p-10">
-        <div className="w-full h-px bg-gray-dark mb-4" />
-        <h1 className="text-3xl font-bold mb-6">공지사항</h1>
+      <div className="p-12">
+        <div className="w-full h-px bg-gray-dark mb-8" />
+        <div className="text-h3 font-bold mb-6">공지사항</div>
         <div className="border rounded-lg divide-y">
           {notices.map((notice) => (
-            <div key={notice.id} className="p-4 hover:bg-gray-50">
+            <div key={notice.id} className="p-4 hover:bg-gray-light">
               <Link href={`/notice/${notice.id}`}>
                 <div>
-                  <h2 className="text-xl font-medium">{notice.title}</h2>
-                  <p className="text-gray-500 text-sm mt-1">{notice.date}</p>
+                  <div className="text-h6 font-medium">{notice.title}</div>
+                  <p className="text-gray-medium text-sm mt-1">{notice.date}</p>
                 </div>
               </Link>
             </div>
