@@ -74,13 +74,13 @@ export default function HomePage() {
       <div className="relative mt-6 w-full max-w-xs mx-auto text-center">
         {/* (히링 타이핑 전) 커서 깜빡임 */}
         {!showHearing && showCursor && (
-          <div className="absolute left-1/2 transform -translate-x-1/2 -top-5 h-10 w-1 bg-gray-dark animate-blink"></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 -top-5 h-10 w-1 bg-gray-medium animate-blink"></div>
         )}
 
         {/* (히링 타이핑 시작 후) 위쪽에 텍스트 타이핑 및 커서 */}
         {showHearing && (
           <motion.div
-            className="absolute left-1/2 transform -translate-x-1/2 -top-10 text-h2 font-medium text-primary whitespace-nowrap"
+            className="absolute left-1/2 transform -translate-x-1/2 -top-10 text-h2 font-medium text-secondary whitespace-nowrap"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }} 
