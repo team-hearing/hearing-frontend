@@ -11,9 +11,9 @@ export default function AboutPage() {
       
       <div className="p-12">
         <div className="w-full h-px bg-gray-dark mb-8" />
-        <h1 className="text-h2 font-bold mb-6">About HEARING</h1>
+        <div className="text-h3 font-bold mb-6">About HEARING</div>
         
-        <p className="text-h5 font-semibold mb-10">
+        <p className="text-h6 font-semibold mb-10">
           HEARING은 한국과 세계의 근현대사를 비교하며 탐색할 수 있는 웹 애플리케이션입니다.
         </p>
         
