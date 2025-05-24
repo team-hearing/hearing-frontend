@@ -11,7 +11,6 @@ const MobileTimeline = ({ onYearChange }: MobileTimelineProps = {}) => {
   const yearRefs = useRef<{[key: number]: HTMLDivElement | null}>({});
   const [activeYear, setActiveYear] = useState<number | null>(null);
   
-  // 날짜 형식에서 ~ 앞에 줄바꿈 추가하는 함수
   const formatDateWithBreak = (dateStr: string) => {
     if (dateStr.includes('~')) {
       return dateStr.replace(/~/, "<br />~");
@@ -19,7 +18,6 @@ const MobileTimeline = ({ onYearChange }: MobileTimelineProps = {}) => {
     return dateStr;
   };
   
-  // 스크롤 시 현재 보이는 연도 감지
   useEffect(() => {
     if (!containerRef.current) return;
     
@@ -31,7 +29,6 @@ const MobileTimeline = ({ onYearChange }: MobileTimelineProps = {}) => {
       const containerHeight = container.clientHeight;
       const middlePosition = scrollTop + containerHeight / 3;
       
-      // 가장 가까운 연도 찾기
       let closestYear = null;
       let minDistance = Infinity;
       
@@ -56,7 +53,6 @@ const MobileTimeline = ({ onYearChange }: MobileTimelineProps = {}) => {
     const container = containerRef.current;
     container.addEventListener('scroll', handleScroll);
     
-    // 초기 연도 설정을 위해 한 번 호출
     handleScroll();
     
     return () => {
@@ -64,7 +60,7 @@ const MobileTimeline = ({ onYearChange }: MobileTimelineProps = {}) => {
     };
   }, [activeYear, onYearChange]);
   
-  // 연도 요소에 ref 설정하는 함수
+ 
   const setYearRef = (el: HTMLDivElement | null, year: number) => {
     yearRefs.current[year] = el;
   };
@@ -87,23 +83,18 @@ const MobileTimeline = ({ onYearChange }: MobileTimelineProps = {}) => {
               className="relative"
               ref={(el) => setYearRef(el, yearData.year)}
             >
-              {/* 연도 표시 */}
-              <div className="mb-6 flex items-center">
-                <div className="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center z-10">
-                  <span className="text-h6 font-bold">{yearData.year}</span>
-                </div>
-              </div>
               
               {/* 해당 연도의 이벤트들 */}
               <div className="ml-6 space-y-10">
                 {yearData.events.map((event) => (
                   <div key={event.id} className="relative pl-10">
                     {/* 연도마커 */}
-                    <div className="absolute left-[-2] top-6 w-4 h-4 rounded-full border-2 border-primary bg-white" />
+                    <div className="absolute left-[-2] top-6 w-4 h-4 rounded-full bg-primary" />
                     
                     {/* 이벤트 날짜 - ~ 앞에서 줄바꿈 */}
-                    <div className="absolute left-[-3rem] top-4 text-body font-semibold text-gray-dark w-12 text-right pr-2 leading-tight">
-                      <span dangerouslySetInnerHTML={{ __html: formatDateWithBreak(event.date) }} />
+                    <div className="absolute left-[-3rem] top-4 text-sm font-regular text-gray-dark w-12 text-center pr-2 leading-tight">
+                      <div className="text-body font-semibold">{yearData.year}</div>
+                      <div dangerouslySetInnerHTML={{ __html: formatDateWithBreak(event.date) }} />
                     </div>
                     
                     {/* 이벤트 카드 */}
