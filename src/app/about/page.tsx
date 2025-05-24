@@ -12,7 +12,7 @@ export default function AboutPage() {
       <div className="px-8 py-8 sm:px-10 sm:py-8 md:px-8 md:py-10 lg:px-12 lg:py-12 xl:px-16">
         <div className="w-full h-px bg-gray-dark mb-6 sm:mb-8 md:mb-10 lg:mb-12" />
         
-        <div className="max-w-4xl">
+        <div className="max-w-4xl lg:max-w-none">
           <div className="text-h5 sm:text-h4 md:text-h3 font-bold mb-6 sm:mb-8 md:mb-10 lg:mb-12">About HEARING</div>
           
           <p className="text-body sm:text-h6 font-semibold mb-8 sm:mb-10 md:mb-12 lg:mb-14 leading-relaxed sm:leading-relaxed md:leading-loose">
