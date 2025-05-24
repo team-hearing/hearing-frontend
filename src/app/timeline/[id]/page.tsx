@@ -7,7 +7,6 @@ import { timelineData } from "../components/timelineData";
 
 // 컴포넌트 임포트
 import CloseButton from "../components/detail/CloseButton";
-import PageSection from "../components/detail/PageSection";
 import IntroPage from "../components/detail/IntroPage";
 import GalleryPage from "../components/detail/GalleryPage";
 import QuotePage from "../components/detail/QuotePage";
@@ -50,32 +49,32 @@ export default function DetailPage({ params }: {
         className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth h-screen"
       >
         {/* 1 페이지 */}
-        <PageSection>
+        <div className="min-w-full w-screen h-screen flex items-center snap-start">
           <IntroPage 
             title={post.title}
             content={post.content}
             content2={post.content2}
             images={post.images}
           />
-        </PageSection>
+        </div>
        
         {/* 2 페이지 */}
-        <PageSection>
+        <div className="min-w-full w-screen h-screen flex items-center snap-start">
           <GalleryPage 
             content={post.content2}
             images={post.images}
           />
-        </PageSection>
+        </div>
 
         {/* 3 페이지 */}
-        <PageSection centered>
+        <div className="min-w-full w-screen h-screen flex items-center justify-center snap-start">
           <QuotePage 
             author={post.author}
             authorDesc={post.authorDesc}
             authorInfo={post.authorInfo}
             images={post.images}
           />
-        </PageSection>
+        </div>
       </div>
     </div>
   );
