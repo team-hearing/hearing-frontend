@@ -1,6 +1,7 @@
 "use client";
 
 import Navigation from '../components/Navigation';
+import Image from 'next/image';
 
 export default function AboutPage() {
   return (
@@ -24,8 +25,14 @@ export default function AboutPage() {
           </p>
           
           <div className="aspect-video overflow-hidden rounded-lg shadow-sm mt-4 sm:mt-6 md:mt-8 lg:mt-10">  
-            <img src="https://images.unsplash.com/photo-hipcPLJE4uk?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"   
-             className="object-cover w-full h-full" />           
+            <Image 
+              src="/img/subwayline1.jpg"
+              alt="HEARING 애플리케이션 소개 이미지"
+              width={1200}
+              height={675}
+              className="object-cover w-full h-full"
+              priority
+            />           
           </div>
         </div>         
       </div>
