@@ -1,20 +1,20 @@
 import React from 'react';
+import { getQuoteByEventId, defaultQuote } from './quoteData';
 
 interface QuotePageProps {
-  author: string;
-  authorDesc: string;
-  authorInfo: string[];
-  images: string[];
+  eventId: number;
 }
 
 // 상세 페이지 3페이지
 
+export default function QuotePage({ eventId }: QuotePageProps) {
+  const quoteData = getQuoteByEventId(eventId) || defaultQuote;
+  const { quote, author, authorDesc, authorInfo, images } = quoteData;
 
-export default function QuotePage({ author, authorDesc, authorInfo, images }: QuotePageProps) {
   return (
     <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6">
       <blockquote className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium mb-8 sm:mb-12 md:mb-20 px-4 sm:px-6 text-left">
-        " 역사는 과거와 현재의 끊임없는 대화이다. "
+        " {quote} "
       </blockquote>
       <div className="mt-12 sm:mt-16 md:mt-24 text-left">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">

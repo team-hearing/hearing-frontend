@@ -68,12 +68,7 @@ export default function DetailPage({ params }: {
 
         {/* 3 페이지 */}
         <div className="min-w-full w-screen h-screen flex items-center justify-center snap-start">
-          <QuotePage 
-            author={post.author}
-            authorDesc={post.authorDesc}
-            authorInfo={post.authorInfo}
-            images={post.images}
-          />
+          <QuotePage eventId={post.id} />
         </div>
       </div>
     </div>
