@@ -33,6 +33,15 @@ const Navigation = () => {
           <div className="absolute top-16 left-4 sm:left-6 lg:left-8 w-64 bg-white shadow-lg rounded-lg border z-50">
             <div className="flex flex-col py-2">
               <Link
+                href="/timeline"
+                className={`px-4 py-3 text-base font-medium transition-colors hover:bg-gray-light ${
+                  pathname === "/timeline" ? "text-primary" : "text-gray-dark hover:text-primary"
+                }`}
+                onClick={toggleMenu}
+              >
+                Timeline
+              </Link>
+              <Link
                 href="/about"
                 className={`px-4 py-3 text-base font-medium transition-colors hover:bg-gray-light ${
                   pathname === "/about" ? "text-primary" : "text-gray-dark hover:text-primary"
