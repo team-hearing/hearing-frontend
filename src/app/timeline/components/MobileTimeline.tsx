@@ -157,7 +157,7 @@ const MobileTimeline = ({ onYearChange }: MobileTimelineProps = {}) => {
                   </div>
                   
                   <Link href={`/timeline/${event.id}`}>
-                    <div className="bg-gray-light rounded-xl mt-2 hover:bg-gray-light transition-colors relative h-48 flex items-end overflow-hidden">
+                    <div className="bg-gray-light rounded-sm mt-2 hover:bg-gray-light transition-colors relative h-48 flex items-end overflow-hidden">
                       {/* 실제 이미지 표시 */}
                       <Image
                         src={getImagePath(event.id)}

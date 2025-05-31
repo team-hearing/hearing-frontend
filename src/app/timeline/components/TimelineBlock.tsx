@@ -79,7 +79,7 @@ const TimelineBlock = ({ data }: { data: TimelineData }) => {
               <div key={event.id} className="min-w-[130px] max-w-[180px]">
                 {/* 이미지 */}
                 <Link href={`/timeline/${event.id}`}>
-                  <div className="relative w-32 h-40 mb-2 cursor-pointer hover:opacity-80 transition-opacity overflow-hidden rounded-lg">
+                  <div className="relative w-32 h-40 mb-2 cursor-pointer hover:opacity-80 transition-opacity overflow-hidden rounded-sm">
                     <Image
                       src={getImagePath(event.id)}
                       alt={event.title}
@@ -92,7 +92,7 @@ const TimelineBlock = ({ data }: { data: TimelineData }) => {
                         target.style.display = 'none';
                         const parent = target.parentElement;
                         if (parent) {
-                          parent.className = "w-32 h-40 bg-gray-light flex items-center justify-center text-sm text-gray-500 mb-2 cursor-pointer hover:opacity-80 transition-opacity rounded-lg";
+                          parent.className = "w-32 h-40 bg-gray-light flex items-center justify-center text-sm text-gray-500 mb-2 cursor-pointer hover:opacity-80 transition-opacity rounded-sm";
                           parent.innerHTML = `<span>이미지</span>`;
                         }
                       }}
