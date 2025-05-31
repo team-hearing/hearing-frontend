@@ -79,7 +79,7 @@ const TimelineBlock = ({ data }: { data: TimelineData }) => {
               <div key={event.id} className="min-w-[130px] max-w-[180px]">
                 {/* 이미지 */}
                 <Link href={`/timeline/${event.id}`}>
-                  <div className="relative w-42 h-40 mb-2 cursor-pointer hover:opacity-80 transition-opacity overflow-hidden rounded-lg">
+                  <div className="relative w-32 h-40 mb-2 cursor-pointer hover:opacity-80 transition-opacity overflow-hidden rounded-lg">
                     <Image
                       src={getImagePath(event.id)}
                       alt={event.title}
