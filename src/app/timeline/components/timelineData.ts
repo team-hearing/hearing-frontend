@@ -17,6 +17,7 @@ export const timelineData: TimelineData[] = [
   {
     year: 2024,
     events: [
+      { id: 38, date: "12.29", title: "제주항공 2216편 활주로 이탈 사고", tags: ["교통", "항공", "재난"] },
       { id: 2, date: "12.03", title: "12.3 비상계엄 선포", tags: ["정치", "안보"] },
       { id: 3, date: "10.10", title: "한강 작가 노벨상 수상", tags: ["문화", "문학"] },
       { id: 4, date: "05~08", title: "서울대 N번방 사건", tags: ["사회", "범죄"] },
