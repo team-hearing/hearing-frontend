@@ -1,6 +1,8 @@
 import { timelineData } from "./timelineData";
+import { worldHistoryData } from "./worldHistoryData";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { Earth } from "lucide-react";
 
 interface MobileTimelineProps {
   onYearChange?: (year: number) => void;
@@ -10,12 +12,20 @@ const MobileTimeline = ({ onYearChange }: MobileTimelineProps = {}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const yearRefs = useRef<{[key: number]: HTMLDivElement | null}>({});
   const [activeYear, setActiveYear] = useState<number | null>(null);
+  const [showWorldHistory, setShowWorldHistory] = useState<{[key: number]: boolean}>({});
   
   const formatDateWithBreak = (dateStr: string) => {
-    if (dateStr.includes('~')) {
-      return dateStr.replace(/~/, "<br />~");
-    }
+    // if (dateStr.includes('~')) {
+    //   return dateStr.replace(/~/, "<br />~");
+    // }
     return dateStr;
+  };
+
+  const toggleWorldHistory = (year: number) => {
+    setShowWorldHistory(prev => ({
+      ...prev,
+      [year]: !prev[year]
+    }));
   };
   
   useEffect(() => {
@@ -27,7 +37,6 @@ const MobileTimeline = ({ onYearChange }: MobileTimelineProps = {}) => {
       
       const scrollTop = container.scrollTop;
       const containerHeight = container.clientHeight;
-      const middlePosition = scrollTop + containerHeight / 3;
       
       let closestYear = null;
       let minDistance = Infinity;
@@ -60,7 +69,6 @@ const MobileTimeline = ({ onYearChange }: MobileTimelineProps = {}) => {
     };
   }, [activeYear, onYearChange]);
   
- 
   const setYearRef = (el: HTMLDivElement | null, year: number) => {
     yearRefs.current[year] = el;
   };
@@ -68,54 +76,83 @@ const MobileTimeline = ({ onYearChange }: MobileTimelineProps = {}) => {
   return (
     <div 
       ref={containerRef}
-      className="w-full py-8 px-12 pb-20 h-full overflow-y-auto"
+      className="p-8 h-full overflow-y-auto"
     >
-      {/* 수직 타임라인 라인 */}
+
+      {/* 타임라인 컨테이너 */}
       <div className="relative">
-        {/* 중앙 세로선 */}
-        <div className="absolute left-7 top-0 bottom-0 w-0.5 bg-primary" style={{ height: "calc(100% - 20px)" }} />
-        
-        {/* 타임라인 이벤트들 */}
-        <div className="space-y-16">
-          {timelineData.map((yearData) => (
+        {/* 전체 세로선 */}
+        <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-medium-dark"></div>
+
+        {timelineData.map((yearData) => {
+          const worldHistory = worldHistoryData.find(item => item.year === yearData.year);
+          
+          return (
             <div 
-              key={yearData.year} 
-              className="relative"
+              key={yearData.year}
               ref={(el) => setYearRef(el, yearData.year)}
+              className="pl-12 relative mb-8"
             >
+              {/* 연도 마커*/}
+              <div className="absolute left-2.5 top-0 w-4 h-4 bg-gray-medium-dark rounded-full"></div>
               
-              {/* 해당 연도의 이벤트들 */}
-              <div className="ml-6 space-y-10">
-                {yearData.events.map((event) => (
-                  <div key={event.id} className="relative pl-10">
-                    {/* 연도마커 */}
-                    <div className="absolute left-[-2] top-6 w-4 h-4 rounded-full bg-primary" />
-                    
-                    {/* 이벤트 날짜 - ~ 앞에서 줄바꿈 */}
-                    <div className="absolute left-[-3rem] top-4 text-sm font-regular text-gray-dark w-12 text-center pr-2 leading-tight">
-                      <div className="text-body font-semibold">{yearData.year}</div>
-                      <div dangerouslySetInnerHTML={{ __html: formatDateWithBreak(event.date) }} />
-                    </div>
-                    
-                    {/* 이벤트 카드 */}
-                    <Link href={`/timeline/${event.id}`}>
-                      <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
-                        {/* 이미지 영역 */}
-                        <div className="h-32 bg-gray-100 flex items-center justify-center text-gray-400">
-                          이미지
-                        </div>
-                        {/* 내용 영역 */}
-                        <div className="p-4">
-                          <h3 className="font-bold text-base line-clamp-2">{event.title}</h3>
-                        </div>
-                      </div>
-                    </Link>
+              {/*연도 제목*/}
+              <div className="text-lg font-semibold mb-4 text-primary">{yearData.year}년</div>
+              
+              {/* 컨텐츠 */}
+              {yearData.events.map((event) => (
+                <div key={event.id} className="mb-6">
+                  <div className="text-sm font-regular mb-1">
+                    <span className="text-primary font-regular">{yearData.year}.</span>
+                    <span dangerouslySetInnerHTML={{ __html: formatDateWithBreak(event.date) }} />
                   </div>
-                ))}
-              </div>
+                  
+                  <Link href={`/timeline/${event.id}`}>
+                    <div className="bg-gray-light rounded-xl mt-2 hover:bg-gray-light transition-colors relative h-48 flex items-end">
+                      {/* 임시 이미지 표시 */}
+                      <div className="absolute inset-0 flex items-center justify-center text-gray-medium text-sm">
+                        이미지
+                      </div>
+                      {/* 텍스트 오버레이 */}
+                      <div className="w-full p-2 relative z-10 bg-gray-dark opacity-40 text-white font-semibold text-base">
+                        {event.title}
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              ))}
+
+              {/*세계사 토글*/}
+              {worldHistory && worldHistory.events.length > 0 && (
+                <>
+                  <button
+                    onClick={() => toggleWorldHistory(yearData.year)}
+                    className="text-sm text-primary underline mb-2 hover:text-primary-dark transition-colors"
+                  >
+                    {showWorldHistory[yearData.year] ? "세계사 숨기기" : "+ 세계사 보기"}
+                  </button>
+
+                  {showWorldHistory[yearData.year] && (
+                    <div className="p-4 mt-2 mb-6">
+                      <div className="font-semibold mb-3 flex items-center">
+                        <Earth className="text-lg mr-2" />
+                        세계사 ({yearData.year})
+                      </div>
+                      <ul className="list-disc pl-5 text-sm space-y-1">
+                        {worldHistory.events.map((worldEvent) => (
+                          <li key={worldEvent.id}>
+                            {worldEvent.title}{' '}
+                            {worldEvent.region && <span className="text-gray-400">({worldEvent.region})</span>}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </>
+              )}
             </div>
-          ))}
-        </div>
+          );
+        })}
       </div>
     </div>
   );
