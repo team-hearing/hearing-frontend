@@ -1,5 +1,6 @@
 // 타임라인 데이터 타입 정의
 import Link from 'next/link';
+import { worldHistoryData } from './worldHistoryData';
 
 export type Event = {
   id: number;
@@ -15,6 +16,9 @@ export type TimelineData = {
 
 // 타임라인 블록 컴포넌트
 const TimelineBlock = ({ data }: { data: TimelineData }) => {
+  // 해당 연도의 세계사 데이터 찾기
+  const worldHistory = worldHistoryData.find(item => item.year === data.year);
+
   return (
     <div className="flex flex-col items-start w-full">
       {/* 상단 영역 */}
@@ -57,9 +61,12 @@ const TimelineBlock = ({ data }: { data: TimelineData }) => {
         <div className="ml-2">
           <p className="font-bold mb-2">세계사</p>
           <ul className="list-disc pl-4">
-              <li>사건1</li>
-              <li>사건2</li>
-              <li>사건3</li>
+            {worldHistory?.events.map((event) => (
+              <li key={event.id} className="text-sm mb-1">
+                {event.title}
+                {event.region && <span className="text-gray-500 ml-1">({event.region})</span>}
+              </li>
+            )) || <li className="text-sm text-gray-500">해당 연도 세계사 데이터 없음</li>}
           </ul>
         </div>
       </div>
