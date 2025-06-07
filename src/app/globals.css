@@ -94,8 +94,7 @@ svg tspan,
 .lottie-animation text,
 .lottie-animation tspan {
   font-family: 'Noto Sans KR', 'Open Sans', sans-serif !important;
-  font-weight: 500 !important; /* Medium weight로 설정 */
-  font-style: normal !important;
+  font-weight: 500 !important; 
 }
 
 /* Lottie 컨테이너 내 모든 텍스트 요소 */
