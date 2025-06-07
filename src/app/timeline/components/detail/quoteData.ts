@@ -10,7 +10,7 @@ export type QuoteData = {
 export const quoteData: QuoteData[] = [
   // 2025년
   {
-    eventId: 1, // 2025.04.04 윤석열 파면 (timelineData id: 1)
+    eventId: 1, // 2025.04.04 윤석열 탄핵 (timelineData id: 1)
     quote: "대한민국의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다.",
     author: "대한민국 헌법 제1조 2항",
     authorDesc: "대한민국 헌법",

@@ -11,7 +11,7 @@ export const timelineData: TimelineData[] = [
   {
     year: 2025,
     events: [
-      { id: 1, date: "04.04", title: "윤석열 파면", tags: ["정치", "한국"] }
+      { id: 1, date: "04.04", title: "윤석열 탄핵", tags: ["정치", "한국"] }
     ]
   },
   {
