@@ -14,6 +14,9 @@ export default function useHorizontalWheel(containerRef: RefObject<HTMLDivElemen
       const scrollLeft = container.scrollLeft;
       const pageWidth = container.clientWidth;
 
+      // 스크롤 가능 여부 확인
+      if (container.scrollWidth <= container.clientWidth) return;
+
       // 휠 방향에 따라 스크롤 이동
       if (e.deltaY > 0) {
         // 아래로 스크롤 (다음 페이지)
