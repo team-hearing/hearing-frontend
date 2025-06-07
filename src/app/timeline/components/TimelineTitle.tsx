@@ -17,7 +17,7 @@ export default function TimelineTitle({
   };
 
   return (
-    <div className="p-8 sm:p-10 px-8 sm:px-12">
+    <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 py-8 sm:py-10">
       <div className="w-full h-px bg-gray-dark mb-3 sm:mb-4" />
       
       <div className="flex justify-between items-end">
