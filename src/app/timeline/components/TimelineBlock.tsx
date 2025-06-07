@@ -71,15 +71,15 @@ const TimelineBlock = ({ data }: { data: TimelineData }) => {
   return (
     <div className="flex flex-col items-start w-full">
       {/* 상단 영역 */}
-      <div className="relative mb-24 w-full">
+      <div className="relative mb-12 sm:mb-16 md:mb-20 lg:mb-24 w-full">
         {/* 연도별 이벤트 목록 */}
-        <div className="pl-28">
-          <div className="flex flex-row gap-6 overflow-x-auto">
+        <div className="pl-16 sm:pl-20 md:pl-24 lg:pl-28">
+          <div className="flex flex-row gap-3 sm:gap-4 md:gap-5 lg:gap-6 overflow-x-auto">
             {data.events.map((event) => (
-              <div key={event.id} className="min-w-[130px] max-w-[180px]">
+              <div key={event.id} className="min-w-[100px] sm:min-w-[110px] md:min-w-[120px] lg:min-w-[130px] max-w-[120px] sm:max-w-[140px] md:max-w-[160px] lg:max-w-[180px]">
                 {/* 이미지 */}
                 <Link href={`/timeline/${event.id}`}>
-                  <div className="relative w-32 h-40 mb-2 cursor-pointer hover:opacity-80 transition-opacity overflow-hidden rounded-sm">
+                  <div className="relative w-24 h-32 sm:w-28 sm:h-36 md:w-30 md:h-38 lg:w-32 lg:h-40 mb-2 cursor-pointer hover:opacity-80 transition-opacity overflow-hidden rounded-sm">
                     <Image
                       src={getImagePath(event.id)}
                       alt={event.title}
@@ -113,19 +113,19 @@ const TimelineBlock = ({ data }: { data: TimelineData }) => {
         </div>
 
         {/* 연도 마커 */}
-        <div className="absolute left-8 top-[244px] z-10">
-          <p className="text-center text-body font-bold">{data.year}</p>
-          <div className="w-6 h-6 rounded-full border-2 border-primary bg-white flex items-center justify-center">
+        <div className="absolute left-4 sm:left-5 md:left-6 lg:left-8 top-[180px] sm:top-[200px] md:top-[220px] lg:top-[244px] z-10">
+          <p className="text-center text-sm sm:text-base md:text-body font-bold">{data.year}</p>
+          <div className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full border-2 border-primary bg-white flex items-center justify-center">
           </div>
         </div>
       </div>
 
       {/* 하단 영역 - 세계사 리스트 */}
-      <div className="flex items-start gap-2 pl-28">
-        <div className="bg-secondary w-8 h-4 flex items-center justify-center"></div>
-        <div className="ml-2">
-          <p className="font-bold mb-2">세계사</p>
-          <ul className="list-disc pl-4">
+      <div className="flex items-start gap-1 sm:gap-2 pl-16 sm:pl-20 md:pl-24 lg:pl-28">
+        <div className="bg-secondary w-6 h-3 sm:w-7 sm:h-3.5 md:w-8 md:h-4 flex items-center justify-center"></div>
+        <div className="ml-1 sm:ml-2">
+          <p className="font-bold mb-1 sm:mb-2 text-sm sm:text-base">세계사</p>
+          <ul className="list-disc pl-3 sm:pl-4">
             {worldHistory?.events.map((event) => (
               <li key={event.id} className="text-sm mb-1">
                 {event.title}

@@ -78,7 +78,7 @@ export default function Timeline() {
       {/* 데스크톱 타임라인 */}
       <div className={`${isMobile ? 'hidden' : 'block'} md:block flex-grow flex flex-col relative`}>
         {/* 타임라인 선 - 반응형 위치 */}
-        <div className="absolute left-0 top-[200px] sm:top-[250px] md:top-[375px] lg:top-[408px] w-full h-1 bg-primary z-0" />
+        <div className="absolute left-0 top-[200px] sm:top-[250px] md:top-[350px] lg:top-[408px] w-full h-1 bg-primary z-0" />
         
         {/* 컨텐츠 영역 - 반응형 여백 */}
         <div className="flex-grow pt-16 sm:pt-20 md:pt-24 lg:pt-32 px-4 sm:px-6 md:px-8 lg:px-12">
