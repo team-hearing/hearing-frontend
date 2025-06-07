@@ -71,7 +71,7 @@ export default function Timeline() {
       <TimelineTitle currentYear={currentYear} />
       
       {/* 모바일 타임라인 */}
-      <div className={`md:hidden ${isMobile ? 'block' : 'hidden'} overflow-y-auto flex-grow`}>
+      <div className={`md:hidden ${isMobile ? 'block' : 'hidden'} timeline-scroll overflow-y-auto flex-grow`}>
         <MobileTimeline onYearChange={handleMobileYearChange} />
       </div>
       
@@ -82,10 +82,10 @@ export default function Timeline() {
         
         {/* 컨텐츠 영역 - 반응형 여백 */}
         <div className="flex-grow pt-16 sm:pt-20 md:pt-24 lg:pt-32 px-4 sm:px-6 md:px-8 lg:px-12">
-          <div
-            ref={scrollRef}
-            className="overflow-x-auto h-full snap-x snap-mandatory scroll-smooth scrollbar-thin scrollbar-thumb-primary scrollbar-track-gray-100 scrollbar-thumb-rounded-b-lg"
-          >
+                      <div
+              ref={scrollRef}
+              className="timeline-scroll overflow-x-auto h-full snap-x snap-mandatory scroll-smooth"
+            >
             <div className="flex gap-32 sm:gap-40 md:gap-52 lg:gap-60 min-w-max relative z-10">
               {timelineData.map((block) => (
                 <div key={block.year} className="snap-start scroll-mx-4 sm:scroll-mx-6 md:scroll-mx-8 lg:scroll-mx-12" data-year={block.year}>
