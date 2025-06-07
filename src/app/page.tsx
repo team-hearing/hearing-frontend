@@ -93,7 +93,7 @@ export default function LottieIntroPage() {
             className="lottie-loading"
           />
         ) : (
-          <div className="text-white text-lg">Hearin...</div>
+          <div className="text-white text-body sm:text-h6 md:text-h5 lg:text-h4 font-kr font-regular">Hearing...</div>
         )}
       </div>
     );
