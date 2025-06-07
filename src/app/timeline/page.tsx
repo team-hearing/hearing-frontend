@@ -77,18 +77,18 @@ export default function Timeline() {
       
       {/* 데스크톱 타임라인 */}
       <div className={`${isMobile ? 'hidden' : 'block'} md:block flex-grow flex flex-col relative`}>
-        {/* 타임라인 선 */}
-        <div className="absolute left-0 top-[408px] w-full h-1 bg-primary z-0" />
+        {/* 타임라인 선 - 반응형 위치 */}
+        <div className="absolute left-0 top-[200px] sm:top-[250px] md:top-[375px] lg:top-[408px] w-full h-1 bg-primary z-0" />
         
-        {/* 컨텐츠 영역 - 위쪽 여백 */}
-        <div className="flex-grow pt-32 px-12">
+        {/* 컨텐츠 영역 - 반응형 여백 */}
+        <div className="flex-grow pt-16 sm:pt-20 md:pt-24 lg:pt-32 px-4 sm:px-6 md:px-8 lg:px-12">
           <div
             ref={scrollRef}
             className="overflow-x-auto h-full snap-x snap-mandatory scroll-smooth scrollbar-thin scrollbar-thumb-primary scrollbar-track-gray-100 scrollbar-thumb-rounded-b-lg"
           >
-            <div className="flex gap-60 min-w-max relative z-10">
+            <div className="flex gap-32 sm:gap-40 md:gap-52 lg:gap-60 min-w-max relative z-10">
               {timelineData.map((block) => (
-                <div key={block.year} className="snap-start scroll-mx-12" data-year={block.year}>
+                <div key={block.year} className="snap-start scroll-mx-4 sm:scroll-mx-6 md:scroll-mx-8 lg:scroll-mx-12" data-year={block.year}>
                   <TimelineBlock data={block} />
                 </div>
               ))}
@@ -96,8 +96,8 @@ export default function Timeline() {
           </div>
         </div>
         
-        {/* 스크롤바 영역 */}
-        <div className="h-12 px-12 mt-auto rounded-lg"></div>
+        {/* 스크롤바 영역 - 반응형 */}
+        <div className="h-8 sm:h-10 md:h-12 px-4 sm:px-6 md:px-8 lg:px-12 mt-auto"></div>
       </div>
     </div>
   );
