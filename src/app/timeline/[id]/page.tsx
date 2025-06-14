@@ -39,17 +39,17 @@ export default function DetailPage({ params }: {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="h-screen bg-white relative">
       {/* 닫기 버튼 */}
       <CloseButton />
 
       {/* 수평 스크롤 컨테이너 */}
       <div
         ref={scrollContainerRef}
-        className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth h-screen"
+        className="absolute inset-0 flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth"
       >
         {/* 1 페이지 */}
-        <div className="min-w-full w-screen h-screen flex items-start snap-start px-4 sm:px-6 md:px-8 lg:px-12 pt-24 md:pt-28 pb-8 max-w-screen-2xl mx-auto overflow-y-auto">
+        <div className="min-w-full w-screen min-h-full snap-start overflow-y-auto hide-scrollbar px-4 sm:px-6 md:px-8 lg:px-12 pt-24 md:pt-28 pb-8 max-w-screen-2xl mx-auto">
           <IntroPage 
             title={post.title}
             content={post.content}
@@ -59,7 +59,7 @@ export default function DetailPage({ params }: {
         </div>
        
         {/* 2 페이지 */}
-        <div className="min-w-full w-screen h-screen flex items-start snap-start px-4 sm:px-6 md:px-8 lg:px-12 pt-24 md:pt-28 pb-8 max-w-screen-2xl mx-auto overflow-y-auto">
+        <div className="min-w-full w-screen min-h-full snap-start overflow-y-auto hide-scrollbar px-4 sm:px-6 md:px-8 lg:px-12 pt-24 md:pt-28 pb-8 max-w-screen-2xl mx-auto">
           <GalleryPage 
             content={post.content2}
             images={post.images}
@@ -67,7 +67,7 @@ export default function DetailPage({ params }: {
         </div>
 
         {/* 3 페이지 */}
-        <div className="min-w-full w-screen h-screen flex items-start snap-start px-4 sm:px-6 md:px-8 lg:px-12 pt-24 md:pt-28 pb-8 max-w-screen-2xl mx-auto overflow-y-auto">
+        <div className="min-w-full w-screen min-h-full snap-start overflow-y-auto hide-scrollbar px-4 sm:px-6 md:px-8 lg:px-12 pt-24 md:pt-28 pb-8 max-w-screen-2xl mx-auto">
           <QuotePage eventId={post.id} />
         </div>
       </div>
