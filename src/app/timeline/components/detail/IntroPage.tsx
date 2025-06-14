@@ -18,14 +18,14 @@ export default function IntroPage({ title, content, content2, images }: IntroPag
         <p className="text-sm sm:text-base lg:text-xl mb-4 sm:mb-6 md:mb-8">{content2}</p>
       </div>
       <div className="space-y-3 sm:space-y-4 md:space-y-6">
-        <div className="bg-gray-light aspect-[4/3] md:aspect-video flex items-center justify-center overflow-hidden">
+        <div className="bg-gray-light aspect-[4/3] md:aspect-video flex items-center justify-center">
           <img
             src={images[1] || '/placeholder.jpg'}
             alt={`${title} 관련 이미지 1`}
             className="object-cover w-full h-full"
           />
         </div>
-        <div className="bg-gray-light aspect-[4/3] md:aspect-video flex items-center justify-center overflow-hidden">
+        <div className="bg-gray-light aspect-[4/3] md:aspect-video flex items-center justify-center">
           <img
             src={images[2] || '/placeholder.jpg'}
             alt={`${title} 관련 이미지 2`}
