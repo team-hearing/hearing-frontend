@@ -1,100 +1,40 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
 
-export default function HomePage() {
-  const [showCursor, setShowCursor] = useState(true);
-  const [typedText, setTypedText] = useState("");
-  const [showHearing, setShowHearing] = useState(false);
-  const [typingComplete, setTypingComplete] = useState(false);
-  const fullText = "히링(HEARING)";
+import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
+
+export default function IntroPage() {
+  const [isFading, setIsFading] = useState(false);
   const router = useRouter();
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // 커서 깜빡임
-    const cursorInterval = setInterval(() => {
-      setShowCursor((prev) => !prev);
-    }, 530);
-
-    // 3초 후 히링 타이핑 시작
-    const hearingTimeout = setTimeout(() => {
-      setShowHearing(true);
-    }, 3000);
-
-    return () => {
-      clearInterval(cursorInterval);
-      clearTimeout(hearingTimeout);
-    };
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 1.0;
+    }
   }, []);
 
-  useEffect(() => {
-    if (!showHearing) return;
-
-    let currentIndex = 0;
-    const typingInterval = setInterval(() => {
-      if (currentIndex < fullText.length) {
-        setTypedText(fullText.substring(0, currentIndex + 1));
-        currentIndex++;
-      } else {
-        clearInterval(typingInterval);
-        setTypingComplete(true);
-
-        // 타이핑 완료 후 
-        setTimeout(() => {
-          router.push("/timeline");
-        }, 2000); 
-      }
-    }, 150);
-
-    return () => clearInterval(typingInterval);
-  }, [showHearing, router]);
+  // 비디오 재생 완료 후 페이드 아웃 및 페이지 이동
+  const handleVideoEnded = () => {
+    setIsFading(true);
+    setTimeout(() => {
+      router.push('/timeline');
+    }, 100); // 0.1초 페이드 아웃 후 이동
+  };
 
   return (
-    <motion.div
-      className="flex flex-col items-center justify-center w-full h-screen gap-6 bg-white"
-      initial={{ opacity: 1 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }} // 페이드 아웃 효과 추가
-      transition={{ duration: 1 }} // 자연스러운 페이드 아웃
-    >
-      <AnimatePresence>
-        <motion.h1
-          className="font-kr text-h1 font-bold text-black tracking-tight"
-          initial={{ opacity: 1 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }} // 페이드 아웃 효과
-          transition={{ duration: 1 }}
-        >
-          역사를 듣다.
-        </motion.h1>
-      </AnimatePresence>
-
-      {/* '히링(HEARING)' 타이핑 영역 */}
-      <div className="relative mt-6 w-full max-w-xs mx-auto text-center">
-        {/* (히링 타이핑 전) 커서 깜빡임 */}
-        {!showHearing && showCursor && (
-          <div className="absolute left-1/2 transform -translate-x-1/2 -top-5 h-10 w-1 bg-gray-dark animate-blink"></div>
-        )}
-
-        {/* (히링 타이핑 시작 후) 위쪽에 텍스트 타이핑 및 커서 */}
-        {showHearing && (
-          <motion.div
-            className="absolute left-1/2 transform -translate-x-1/2 -top-10 text-h2 font-medium text-primary whitespace-nowrap"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }} 
-            transition={{ duration: 0.5 }}
-          >
-            <span className="flex items-center justify-center">
-              {typedText}
-              {!typingComplete && showCursor && (
-                <span className="inline-block w-1 h-8 bg-primary ml-1 animate-blink"></span>
-              )}
-            </span>
-          </motion.div>
-        )}
-      </div>
-    </motion.div>
+    <div className={`fixed inset-0 z-50 bg-black transition-opacity duration-500 ease-out ${isFading ? 'opacity-0' : 'opacity-100'}`}>
+      <video
+        ref={videoRef}
+        src="/videos/intro.mp4"
+        autoPlay
+        muted
+        playsInline
+        onEnded={handleVideoEnded}
+        className="w-full h-full object-contain"
+      />
+    </div>
   );
 }
+
+  

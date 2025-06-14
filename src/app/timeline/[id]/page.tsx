@@ -1,26 +1,76 @@
 // app/timeline/[id]/page.tsx
-import { notFound } from 'next/navigation';
+"use client";
+import { notFound } from "next/navigation";
+import { useRef, useEffect, useState } from "react";
+import { use } from "react";
+import { timelineData } from "../components/timelineData";
 
-export default function DetailPage({ params }: { params: { id: string } }) {
-  // 예시 데이터 (실제로는 API나 데이터베이스에서 가져올 수 있음)
-  const posts = {
-    '1': { id: 1, title: '게시물 1', content: '첫 번째 게시물의 내용입니다.' },
-    '2': { id: 2, title: '게시물 2', content: '두 번째 게시물의 내용입니다.' },
-    '3': { id: 3, title: '게시물 3', content: '세 번째 게시물의 내용입니다.' },
+// 컴포넌트 임포트
+import CloseButton from "../components/detail/CloseButton";
+import IntroPage from "../components/detail/IntroPage";
+import GalleryPage from "../components/detail/GalleryPage";
+import QuotePage from "../components/detail/QuotePage";
+import useHorizontalWheel from "../hooks/useHorizontalWheel";
+
+export default function DetailPage({ params }: { 
+  params: Promise<{ id: string }> 
+}) {
+  const resolvedParams = use(params);
+  const post = {
+    id: Number(resolvedParams.id),
+    title: "Head",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt",
+    content2:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    author: "말한 사람",
+    authorDesc: "짧은 설명",
+    authorInfo: ["00기관", "00기관"],
+    images: ["/image1.jpg", "/image2.jpg", "/image3.jpg", "/image4.jpg", "/image5.jpg", "/image6.jpg", "/image7.jpg", "/image8.jpg"],
   };
 
-  const post = posts[params.id as keyof typeof posts];
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  
+  // 수평 휠 스크롤 커스텀 훅 사용
+  useHorizontalWheel(scrollContainerRef);
 
-  // 게시물이 없는 경우 404 페이지로 리다이렉트
   if (!post) {
     notFound();
   }
 
   return (
-    <div>
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
-      <a href="/timeline">타임라인으로 돌아가기</a>
+    <div className="min-h-screen bg-white">
+      {/* 닫기 버튼 */}
+      <CloseButton />
+
+      {/* 수평 스크롤 컨테이너 */}
+      <div
+        ref={scrollContainerRef}
+        className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth h-screen"
+      >
+        {/* 1 페이지 */}
+        <div className="min-w-full w-screen h-screen flex items-start snap-start px-4 sm:px-6 md:px-8 lg:px-12 pt-24 md:pt-28 pb-8 max-w-screen-2xl mx-auto overflow-y-auto">
+          <IntroPage 
+            title={post.title}
+            content={post.content}
+            content2={post.content2}
+            images={post.images}
+          />
+        </div>
+       
+        {/* 2 페이지 */}
+        <div className="min-w-full w-screen h-screen flex items-start snap-start px-4 sm:px-6 md:px-8 lg:px-12 pt-24 md:pt-28 pb-8 max-w-screen-2xl mx-auto overflow-y-auto">
+          <GalleryPage 
+            content={post.content2}
+            images={post.images}
+          />
+        </div>
+
+        {/* 3 페이지 */}
+        <div className="min-w-full w-screen h-screen flex items-start snap-start px-4 sm:px-6 md:px-8 lg:px-12 pt-24 md:pt-28 pb-8 max-w-screen-2xl mx-auto overflow-y-auto">
+          <QuotePage eventId={post.id} />
+        </div>
+      </div>
     </div>
   );
 }

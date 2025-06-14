@@ -1,6 +1,5 @@
 import type React from "react"
 import "@/app/globals.css"
-import { ThemeProvider } from "next-themes"
 
 export const metadata = {
   title: "역사를 듣다 - 히링(HEARING)",
@@ -13,16 +12,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ko" suppressHydrationWarning>
+    <html lang="ko">
       <body className="font-kr">
-        <ThemeProvider 
-          attribute="class" 
-          defaultTheme="light" 
-          enableSystem 
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   )
