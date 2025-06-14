@@ -11,7 +11,7 @@ interface MobileTimelineProps {
 
 // 이벤트 ID별 이미지 파일명 매핑 (TimelineBlock.tsx와 동일)
 const imageFileMap: { [key: number]: string } = {
-  1: 'yoon-seok-youl-impeachment.jpg',          // 윤석열 파면
+  1: 'yoon-seok-youl-impeachment.jpg',          // 윤석열 탄핵핵
   2: 'martial-law.png',                         // 12.3 비상계엄 선포
   3: 'han-kang-writer.jpg',                     // 한강 작가 노벨상 수상
   4: 'snu-n-room.webp',                         // 서울대 N번방 사건
