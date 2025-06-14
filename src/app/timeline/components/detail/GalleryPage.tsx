@@ -9,30 +9,31 @@ interface GalleryPageProps {
  
 export default function GalleryPage({ content, images }: GalleryPageProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 w-full">
-      <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-6 md:mb-0">
-        <div className="bg-gray-light aspect-square flex items-center justify-center overflow-hidden">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 w-full">
+      {/* 이미지 영역: 데스크탑(lg)에서는 2x2, 태블릿(md)에서는 1열 스택 */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+        <div className="bg-gray-light aspect-video lg:aspect-square flex items-center justify-center overflow-hidden">
           <img
             src={images[3] || '/placeholder.jpg'}
             alt="갤러리 이미지 1"
             className="object-cover w-full h-full"
           />
         </div>
-        <div className="bg-gray-light aspect-square flex items-center justify-center overflow-hidden">
+        <div className="bg-gray-light aspect-video lg:aspect-square flex items-center justify-center overflow-hidden">
           <img
             src={images[4] || '/placeholder.jpg'}
             alt="갤러리 이미지 2"
             className="object-cover w-full h-full"
           />
         </div>
-        <div className="bg-gray-light aspect-square flex items-center justify-center overflow-hidden">
+        <div className="bg-gray-light aspect-video lg:aspect-square flex items-center justify-center overflow-hidden">
           <img
             src={images[5] || '/placeholder.jpg'}
             alt="갤러리 이미지 3"
             className="object-cover w-full h-full"
           />
         </div>
-        <div className="bg-gray-light aspect-square flex items-center justify-center overflow-hidden">
+        <div className="bg-gray-light aspect-video lg:aspect-square flex items-center justify-center overflow-hidden">
           <img
             src={images[6] || '/placeholder.jpg'}
             alt="갤러리 이미지 4"
@@ -40,7 +41,8 @@ export default function GalleryPage({ content, images }: GalleryPageProps) {
           />
         </div>
       </div>
-      <div className="space-y-6">
+      {/* 텍스트 영역 */}
+      <div className="flex flex-col justify-center space-y-6">
         <p className="text-base sm:text-lg md:text-xl">{content}</p>
         <p className="text-base sm:text-lg md:text-xl">{content}</p>
       </div>

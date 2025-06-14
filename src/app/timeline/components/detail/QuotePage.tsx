@@ -23,8 +23,8 @@ export default function QuotePage({ eventId }: QuotePageProps) {
         <p className="text-base sm:text-lg md:text-xl mb-16 sm:mb-20 md:mb-24">{authorDesc}</p>
         
         <div className="mb-8 sm:mb-10">
-          <div className="flex flex-col lg:flex-row justify-between items-start gap-6 sm:gap-8">
-            <div className="flex-1 order-1 lg:order-none">
+          <div className="flex flex-col md:flex-row justify-between items-start gap-6 sm:gap-8">
+            <div className="flex-1 order-1 md:order-none">
               <h3 className="font-medium mb-4 text-lg">저작권 표시</h3>
               <ul className="list-disc ml-6 sm:ml-8">
                 {authorInfo.map((info, index) => (
@@ -34,7 +34,7 @@ export default function QuotePage({ eventId }: QuotePageProps) {
                 ))}
               </ul>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 flex-1 w-full max-w-md order-2 lg:order-none">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 flex-1 w-full max-w-md order-2 md:order-none">
               <div className="bg-gray-light aspect-square overflow-hidden w-full sm:w-42 h-48 sm:h-52">
                 <img
                   src={images[6] || '/placeholder.jpg'}
