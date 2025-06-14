@@ -12,8 +12,8 @@ export default function QuotePage({ eventId }: QuotePageProps) {
   const { quote, author, authorDesc, authorInfo, images } = quoteData;
 
   return (
-    <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6">
-      <blockquote className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium mb-8 sm:mb-12 md:mb-20 px-4 sm:px-6 text-left">
+    <div className="w-full">
+      <blockquote className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium mb-8 sm:mb-12 md:mb-20 text-left">
         " {quote} "
       </blockquote>
       <div className="mt-12 sm:mt-16 md:mt-24 text-left">
@@ -24,7 +24,7 @@ export default function QuotePage({ eventId }: QuotePageProps) {
         
         <div className="mb-8 sm:mb-10">
           <div className="flex flex-col lg:flex-row justify-between items-start gap-6 sm:gap-8">
-            <div className="flex-1 order-1 lg:order-none px-2">
+            <div className="flex-1 order-1 lg:order-none">
               <h3 className="font-medium mb-4 text-lg">저작권 표시</h3>
               <ul className="list-disc ml-6 sm:ml-8">
                 {authorInfo.map((info, index) => (

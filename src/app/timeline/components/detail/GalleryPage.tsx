@@ -9,7 +9,7 @@ interface GalleryPageProps {
  
 export default function GalleryPage({ content, images }: GalleryPageProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 w-full max-w-screen-2xl mx-auto px-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 w-full">
       <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-6 md:mb-0">
         <div className="bg-gray-light aspect-square flex items-center justify-center overflow-hidden">
           <img
@@ -40,7 +40,7 @@ export default function GalleryPage({ content, images }: GalleryPageProps) {
           />
         </div>
       </div>
-      <div className="space-y-6 px-2">
+      <div className="space-y-6">
         <p className="text-base sm:text-lg md:text-xl">{content}</p>
         <p className="text-base sm:text-lg md:text-xl">{content}</p>
       </div>

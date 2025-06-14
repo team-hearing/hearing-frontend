@@ -49,7 +49,7 @@ export default function DetailPage({ params }: {
         className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth h-screen"
       >
         {/* 1 페이지 */}
-        <div className="min-w-full w-screen h-screen flex items-center snap-start">
+        <div className="min-w-full w-screen h-screen flex items-center snap-start px-4 sm:px-6 md:px-8 lg:px-12 max-w-screen-2xl mx-auto">
           <IntroPage 
             title={post.title}
             content={post.content}
@@ -59,7 +59,7 @@ export default function DetailPage({ params }: {
         </div>
        
         {/* 2 페이지 */}
-        <div className="min-w-full w-screen h-screen flex items-center snap-start">
+        <div className="min-w-full w-screen h-screen flex items-center snap-start px-4 sm:px-6 md:px-8 lg:px-12 max-w-screen-2xl mx-auto">
           <GalleryPage 
             content={post.content2}
             images={post.images}
@@ -67,7 +67,7 @@ export default function DetailPage({ params }: {
         </div>
 
         {/* 3 페이지 */}
-        <div className="min-w-full w-screen h-screen flex items-center justify-center snap-start">
+        <div className="min-w-full w-screen h-screen flex items-center snap-start px-4 sm:px-6 md:px-8 lg:px-12 max-w-screen-2xl mx-auto">
           <QuotePage eventId={post.id} />
         </div>
       </div>
