@@ -1,57 +1,61 @@
 import Link from "next/link";
 
-// const mockData = [
-//   {
-//     year: 2025,
-//     event_id: 1,
-//     description: "",
-//     start_date: "2025-01-01",
-//     end_date: "2025-01-01",
-//     event_date: "2025-01-01",
-//     event_name: "",
-//     hist_image: [""],
-//     hist_video: [""],
-//     key_figures: "",
-//   },
-// ];
+async function getData() {
+  try {
+    const res = await fetch(`${process.env.API_BASE_URL}/hist-events/grouped-by-year`, {
+      cache: 'no-store', // SSR을 위해 캐싱 비활성화
+    });
 
-const mockData = [
-  {
-    year: 2025,
-    event_id: 1,
-    description: "",
-    start_date: "2025-01-01",
-    end_date: "2025-01-01",
-    event_date: "2025-01-01",
-    event_name: "",
-    hist_image: [
-      { id: "1", url: "/images/photo1.jpg", position: 1 },
-      { id: "2", url: "/images/photo2.jpg", position: 2 },
-      { id: "3", url: "/images/photo3.jpg", position: 3 },
-      { id: "4", url: "/images/photo4.jpg", position: 4 },
-    ],
-    hist_video: [
-      { id: "1", url: "/images/photo1.jpg", position: 1 },
-      { id: "2", url: "/images/photo2.jpg", position: 2 },
-      { id: "3", url: "/images/photo3.jpg", position: 3 },
-      { id: "4", url: "/images/photo4.jpg", position: 4 },
-    ],
-    key_figures: "",
-  },
-];
+    //fetch메서드는 네트워크 오류(예: 서버 연결 실패)가 아닌 한, 404나 500 같은 HTTP 오류 상태 코드에서도 reject되지 않는다. 
+    //직접 thow error처리 필요
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
 
-export default function Admin() {
+    const data = await res.json();
+    return { data, error: null };
+
+  } catch (error:any) {
+    console.error('Error fetching data:', error);
+    return { data: null, error: error.message };
+  }
+}
+
+
+export default async function Admin() {
+  const {data:events,error} = await getData();
+
   return (
     <div>
       <h1>역사 사건 목록</h1>
 
-      {mockData.map((histEvent) => {
-        return (
-          <li key={histEvent.event_id} className="w-full">
-            <Link href={`/admin/${histEvent.event_id}`}>{histEvent.year}</Link>
-          </li>
-        );
-      })}
+      {Object.keys(events).length?
+      <>
+        {Object.keys(events).map((year) => {
+          return (
+            <div key={year}>
+              {events[year].map((eventItem:any)=>{
+                return(
+                  <li key={eventItem.eventId} className="w-full">
+                    <Link href={`/admin/${eventItem.eventId}`}>
+                      <span>{year}</span>
+                      <span>{eventItem.eventName}</span>
+                      <span>{eventItem.eventDate}</span>
+                      <span>{eventItem.description}</span>
+                    </Link>
+                  </li>
+                )
+              })
+
+              }
+            </div>
+          );
+        })}
+      </>:
+      <div>데이터 없음</div>
+      }  
     </div>
   );
 }
+
+
