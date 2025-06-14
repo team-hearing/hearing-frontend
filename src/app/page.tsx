@@ -10,7 +10,7 @@ export default function IntroPage() {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 1.0;
+      videoRef.current.playbackRate = 1.5;
     }
   }, []);
 
