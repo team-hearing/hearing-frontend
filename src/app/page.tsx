@@ -19,7 +19,7 @@ export default function IntroPage() {
     setIsFading(true);
     setTimeout(() => {
       router.push('/timeline');
-    }, 100); // 0.1초 페이드 아웃 후 이동
+    }, 500); // 0.5초 페이드 아웃 후 이동
   };
 
   return (
