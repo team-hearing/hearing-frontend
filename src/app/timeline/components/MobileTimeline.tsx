@@ -179,7 +179,7 @@ const MobileTimeline = ({ onYearChange }: MobileTimelineProps = {}) => {
                         }}
                       />
                       {/* 텍스트 오버레이 */}
-                      <div className="w-full p-2 relative z-10 bg-black bg-opacity-30 text-white font-semibold text-base">
+                      <div className="w-full p-2 relative z-10 bg-black bg-opacity-50 text-white font-semibold text-base">
                         {event.title}
                       </div>
                     </div>
