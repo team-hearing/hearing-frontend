@@ -76,12 +76,12 @@ export default function Timeline() {
       </div>
       
       {/* 데스크톱 타임라인 */}
-      <div className={`${isMobile ? 'hidden' : 'block'} md:block flex-grow flex flex-col relative`}>
+      <div className={`${isMobile ? 'hidden' : 'block'} md:block flex-grow flex flex-col relative min-h-0`}>
         {/* 타임라인 선 - 반응형 위치 */}
-        <div className="absolute left-0 top-[200px] sm:top-[250px] md:top-[350px] lg:top-[408px] w-full h-1 bg-primary z-0" />
+        <div className="absolute left-0 top-[180px] sm:top-[220px] md:top-[300px] lg:top-[340px] w-full h-1 bg-primary z-0" />
         
         {/* 컨텐츠 영역 - 반응형 여백 */}
-        <div className="flex-grow pt-16 sm:pt-20 md:pt-24 lg:pt-32 px-4 sm:px-6 md:px-8 lg:px-12">
+        <div className="flex-grow pt-8 sm:pt-10 md:pt-12 lg:pt-16 px-4 sm:px-6 md:px-8 lg:px-12">
                       <div
               ref={scrollRef}
               className="timeline-scroll overflow-x-auto h-full snap-x snap-mandatory scroll-smooth"
