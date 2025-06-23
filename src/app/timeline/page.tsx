@@ -1,11 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
-import TimelineBlock from "./components/TimelineBlock";
-import { timelineData } from "./components/timelineData";
-import Navigation from "../components/Navigation";
-import TimelineTitle from "./components/TimelineTitle";
+import TimelineBlock from "./(components)/TimelineBlock";
+import { timelineData } from "./(components)/timelineData";
+import Navigation from "../(components)/Navigation";
+import TimelineTitle from "./(components)/TimelineTitle";
 import useHorizontalScroll from "./hooks/useHorizontalScroll";
-import MobileTimeline from "./components/MobileTimeline";
+import MobileTimeline from "./(components)/MobileTimeline";
 
 export default function Timeline() {
   const [currentYear, setCurrentYear] = useState<number | undefined>(
@@ -32,7 +32,7 @@ export default function Timeline() {
   
   // 스크롤 이벤트 핸들러 - 현재 보이는 연도 감지
   const handleScroll = (container: HTMLDivElement) => {
-    const blockElements = container.querySelectorAll(".snap-start");
+    const blockElements = container.querySelectorAll("[data-year]");
     if (blockElements.length === 0) return;
 
     // 각 블록의 위치를 검사하여 현재 보이는 블록 찾기
@@ -86,11 +86,11 @@ export default function Timeline() {
 
                       <div
               ref={scrollRef}
-              className="timeline-scroll overflow-x-auto h-full snap-x snap-mandatory scroll-smooth"
+              className="timeline-scroll overflow-x-auto h-full scroll-smooth"
             >
             <div className="flex gap-32 sm:gap-40 md:gap-52 lg:gap-60 min-w-max relative z-10">
               {timelineData.map((block) => (
-                <div key={block.year} className="snap-start scroll-mx-4 sm:scroll-mx-6 md:scroll-mx-8 lg:scroll-mx-12" data-year={block.year}>
+                <div key={block.year} data-year={block.year}>
                   <TimelineBlock data={block} />
                 </div>
               ))}
