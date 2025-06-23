@@ -7,6 +7,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 스크롤바 숨기기 - 직접 CSS로 구현 */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-rgb: 255, 255, 255;
@@ -37,30 +46,6 @@ body {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 타임라인 스크롤바 커스텀 */
-.timeline-scroll::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-.timeline-scroll::-webkit-scrollbar-track {
-  background: #F4F4F4; /* gray-light */
-  border-radius: 4px;
-}
-
-.timeline-scroll::-webkit-scrollbar-thumb {
-  background: #323232; /* primary */
-  border-radius: 4px;
-}
-
-.timeline-scroll::-webkit-scrollbar-thumb:hover {
-  background: #47423E; /* gray-medium-dark */
-}
-
-.timeline-scroll {
-  scrollbar-width: thin;
-  scrollbar-color: #323232 #F4F4F4; /* primary gray-light */
-}
 
 /* Lottie 애니메이션을 위한 스타일 */
 .lottie-animation {

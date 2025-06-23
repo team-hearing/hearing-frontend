@@ -12,8 +12,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ko">
-      <body className="font-kr">
+    <html lang="ko" className="h-full">
+      <body className="font-kr h-full">
         {children}
       </body>
     </html>
