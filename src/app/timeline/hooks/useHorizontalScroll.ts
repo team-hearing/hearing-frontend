@@ -14,18 +14,18 @@ export default function useHorizontalScroll(options: HorizontalScrollOptions = {
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
       const scrollLeft = container.scrollLeft;
-      const pageWidth = container.clientWidth;
+      const scrollSpeed = 550 
 
       if (e.deltaY > 0) {
-        // 다음 페이지 스크롤 
+        // 오른쪽으로 부드럽게 스크롤 
         container.scrollTo({
-          left: scrollLeft + pageWidth,
+          left: scrollLeft + scrollSpeed,
           behavior: "smooth",
         });
       } else if (e.deltaY < 0) {
-        // 이전 페이지 스크롤 
+        // 왼쪽으로 부드럽게 스크롤 
         container.scrollTo({
-          left: scrollLeft - pageWidth,
+          left: scrollLeft - scrollSpeed,
           behavior: "smooth",
         });
       }
