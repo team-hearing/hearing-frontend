@@ -11,7 +11,8 @@ interface MobileTimelineProps {
 
 // 이벤트 ID별 이미지 파일명 매핑 (TimelineBlock.tsx와 동일)
 const imageFileMap: { [key: number]: string } = {
-  1: 'yoon-seok-youl-impeachment.jpg',          // 윤석열 파면
+
+  1: 'yoon-seok-youl-impeachment.jpg',          // 윤석열 탄핵
   2: 'martial-law.png',                         // 12.3 비상계엄 선포
   3: 'han-kang-writer.jpg',                     // 한강 작가 노벨상 수상
   4: 'snu-n-room.webp',                         // 서울대 N번방 사건
@@ -131,7 +132,9 @@ const MobileTimeline = ({ onYearChange }: MobileTimelineProps = {}) => {
       {/* 타임라인 컨테이너 */}
       <div className="relative">
         {/* 전체 세로선 */}
-        <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-medium-dark"></div>
+
+        <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-dark"></div>
+
 
         {timelineData.map((yearData) => {
           const worldHistory = worldHistoryData.find(item => item.year === yearData.year);
@@ -143,7 +146,9 @@ const MobileTimeline = ({ onYearChange }: MobileTimelineProps = {}) => {
               className="pl-12 relative mb-8"
             >
               {/* 연도 마커*/}
-              <div className="absolute left-2.5 top-0 w-4 h-4 bg-gray-medium-dark rounded-full"></div>
+
+              <div className="absolute left-2.5 top-0 w-4 h-4 bg-gray-dark rounded-full"></div>
+
               
               {/*연도 제목*/}
               <div className="text-lg font-semibold mb-4 text-primary">{yearData.year}년</div>
@@ -179,7 +184,9 @@ const MobileTimeline = ({ onYearChange }: MobileTimelineProps = {}) => {
                         }}
                       />
                       {/* 텍스트 오버레이 */}
-                      <div className="w-full p-2 relative z-10 bg-black bg-opacity-30 text-white font-semibold text-base">
+
+                      <div className="w-full p-2 relative z-10 bg-black bg-opacity-50 text-white font-semibold text-base">
+
                         {event.title}
                       </div>
                     </div>
