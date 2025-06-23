@@ -121,7 +121,9 @@ const TimelineBlock = ({ data }: { data: TimelineData }) => {
       </div>
 
       {/* 하단 영역 - 세계사 리스트 */}
+
       <div className="flex items-start gap-1 sm:gap-2 pl-16 sm:pl-20 md:pl-24 lg:pl-28 pb-12">
+
         <div className="bg-secondary w-6 h-3 sm:w-7 sm:h-3.5 md:w-8 md:h-4 flex items-center justify-center"></div>
         <div className="ml-1 sm:ml-2">
           <p className="font-bold mb-1 sm:mb-2 text-sm sm:text-base">세계사</p>

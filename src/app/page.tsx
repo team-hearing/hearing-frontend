@@ -10,7 +10,9 @@ export default function IntroPage() {
 
   useEffect(() => {
     if (videoRef.current) {
+
       videoRef.current.playbackRate = 1.5;
+
     }
   }, []);
 
@@ -19,7 +21,9 @@ export default function IntroPage() {
     setIsFading(true);
     setTimeout(() => {
       router.push('/timeline');
+
     }, 500); // 0.5초 페이드 아웃 후 이동
+
   };
 
   return (
