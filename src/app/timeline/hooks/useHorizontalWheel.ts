@@ -10,22 +10,22 @@ export default function useHorizontalWheel(containerRef: RefObject<HTMLDivElemen
       e.preventDefault();
     
       const scrollLeft = container.scrollLeft;
-      const scrollSpeed = 550; // 스크롤 속도 조절 (픽셀 단위)
+      const pageWidth = container.clientWidth;
 
       // 스크롤 가능 여부 확인
       if (container.scrollWidth <= container.clientWidth) return;
 
-      // 휠 방향에 따라 스크롤 이동
+      // 휠 방향에 따라 스크롤 이동 (페이지 단위)
       if (e.deltaY > 0) {
-        // 아래로 스크롤 (오른쪽으로 이동)
+        // 아래로 스크롤 (다음 페이지)
         container.scrollTo({
-          left: scrollLeft + scrollSpeed,
+          left: scrollLeft + pageWidth,
           behavior: "smooth",
         });
       } else if (e.deltaY < 0) {
-        // 위로 스크롤 (왼쪽으로 이동)
+        // 위로 스크롤 (이전 페이지)
         container.scrollTo({
-          left: scrollLeft - scrollSpeed,
+          left: scrollLeft - pageWidth,
           behavior: "smooth",
         });
       }
