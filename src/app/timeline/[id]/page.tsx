@@ -3,13 +3,13 @@
 import { notFound } from "next/navigation";
 import { useRef, useEffect, useState } from "react";
 import { use } from "react";
-import { timelineData } from "../components/timelineData";
+import { timelineData } from "../(components)/timelineData";
 
 // 컴포넌트 임포트
-import CloseButton from "../components/detail/CloseButton";
-import IntroPage from "../components/detail/IntroPage";
-import GalleryPage from "../components/detail/GalleryPage";
-import QuotePage from "../components/detail/QuotePage";
+import CloseButton from "../(components)/detail/CloseButton";
+import IntroPage from "../(components)/detail/IntroPage";
+import GalleryPage from "../(components)/detail/GalleryPage";
+import QuotePage from "../(components)/detail/QuotePage";
 import useHorizontalWheel from "../hooks/useHorizontalWheel";
 
 export default function DetailPage({ params }: { 
@@ -65,7 +65,6 @@ export default function DetailPage({ params }: {
         {/* 2 페이지 */}
 
         <div className="min-w-full w-screen min-h-full snap-start overflow-y-auto hide-scrollbar px-4 sm:px-6 md:px-8 lg:px-12 pt-24 md:pt-28 pb-8 max-w-screen-2xl mx-auto">
-
           <GalleryPage 
             content={post.content2}
             images={post.images}
