@@ -1,6 +1,6 @@
 "use client";
 
-import Navigation from '../components/Navigation';
+import Navigation from '../(components)/Navigation';
 
 // 업데이트 더미 데이터
 const updates = [
