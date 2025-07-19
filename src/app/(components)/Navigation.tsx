@@ -15,7 +15,7 @@ const Navigation = () => {
 
   return (
     <nav className="bg-white sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
         <div className="flex justify-between items-center h-16">
           {/* Hamburger Menu Button */}
           <button
@@ -24,7 +24,11 @@ const Navigation = () => {
             aria-expanded={isMenuOpen}
             aria-label="메인 메뉴"
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+           {isMenuOpen ? (
+              <X className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7" />
+            ) : (
+              <Menu className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7" />
+            )}
           </button>
         </div>
 
