@@ -11,24 +11,25 @@ export default function Timeline() {
   const [currentYear, setCurrentYear] = useState<number | undefined>(
     timelineData.length > 0 ? timelineData[0].year : undefined
   );
-  const [isMobile, setIsMobile] = useState(false);
+  
+  // const [isMobile, setIsMobile] = useState(false);
   
   // 화면 크기에 따른 모바일 여부 감지
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768); // md 브레이크포인트
-    };
+  // useEffect(() => {
+  //   const checkMobile = () => {
+  //     setIsMobile(window.innerWidth < 768); // md 브레이크포인트
+  //   };
     
-    // 초기 체크
-    checkMobile();
+  //   // 초기 체크
+  //   checkMobile();
     
-    // 리사이즈 이벤트 리스너
-    window.addEventListener('resize', checkMobile);
+  //   // 리사이즈 이벤트 리스너
+  //   window.addEventListener('resize', checkMobile);
     
-    return () => {
-      window.removeEventListener('resize', checkMobile);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener('resize', checkMobile);
+  //   };
+  // }, []);
   
   // 스크롤 이벤트 핸들러 - 현재 보이는 연도 감지
   const handleScroll = (container: HTMLDivElement) => {
@@ -71,13 +72,12 @@ export default function Timeline() {
       <TimelineTitle currentYear={currentYear} />
       
       {/* 모바일 타임라인 */}
-      <div className={`md:hidden ${isMobile ? 'block' : 'hidden'} timeline-scroll overflow-y-auto flex-grow`}>
+      <div className={`md:hidden timeline-scroll overflow-y-auto flex-grow`}>
         <MobileTimeline onYearChange={handleMobileYearChange} />
       </div>
       
       {/* 데스크톱 타임라인 */}
-
-      <div className={`${isMobile ? 'hidden' : 'block'} md:block flex-grow flex flex-col relative min-h-0`}>
+      <div className={`hidden md:block flex-grow flex flex-col relative min-h-0`}>
         {/* 타임라인 선 - 반응형 위치 */}
         <div className="absolute left-0 top-[180px] sm:top-[220px] md:top-[300px] lg:top-[340px] w-full h-1 bg-gray-medium-dark z-0" />
         
