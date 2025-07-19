@@ -38,7 +38,7 @@ const Navigation = () => {
             <div className="flex flex-col py-2">
               <Link
                 href="/timeline"
-                className={`px-4 py-3 text-base font-medium transition-colors hover:bg-gray-light ${
+                className={`px-4 py-3 text-sm sm:text-base lg:text-lg font-medium transition-colors hover:bg-gray-light ${
                   pathname === "/timeline" ? "text-primary" : "text-gray-dark hover:text-primary"
                 }`}
                 onClick={toggleMenu}
@@ -47,7 +47,7 @@ const Navigation = () => {
               </Link>
               <Link
                 href="/about"
-                className={`px-4 py-3 text-base font-medium transition-colors hover:bg-gray-light ${
+                className={`px-4 py-3 text-sm sm:text-base lg:text-lg font-medium transition-colors hover:bg-gray-light ${
                   pathname === "/about" ? "text-primary" : "text-gray-dark hover:text-primary"
                 }`}
                 onClick={toggleMenu}
@@ -56,7 +56,7 @@ const Navigation = () => {
               </Link>
               <Link
                 href="/notice"
-                className={`px-4 py-3 text-base font-medium transition-colors hover:bg-gray-light ${
+                className={`px-4 py-3 text-sm sm:text-base lg:text-lg font-medium transition-colors hover:bg-gray-light ${
                   pathname.startsWith("/notice") ? "text-primary" : "text-gray-dark hover:text-primary"
                 }`}
                 onClick={toggleMenu}
@@ -65,7 +65,7 @@ const Navigation = () => {
               </Link>
               <Link
                 href="/updates"
-                className={`px-4 py-3 text-base font-medium transition-colors hover:bg-gray-light ${
+                className={`px-4 py-3 text-sm sm:text-base lg:text-lg font-medium transition-colors hover:bg-gray-light ${
                   pathname === "/updates" ? "text-primary" : "text-gray-dark hover:text-primary"
                 }`}
                 onClick={toggleMenu}
