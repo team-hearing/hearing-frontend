@@ -30,6 +30,22 @@ export default function Timeline() {
   //     window.removeEventListener('resize', checkMobile);
   //   };
   // }, []);
+
+   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
+    const getEventList = async()=>{
+    try {
+      const res = await fetch(`${baseUrl}/hist-events/grouped-by-year`);
+      const data = await res.json(); 
+      return data;
+    } catch (error) {
+      return;
+    }
+  }
+
+  useEffect(()=>{
+    getEventList().then((eventList_)=>console.log(eventList_))
+  },[])
   
   // 스크롤 이벤트 핸들러 - 현재 보이는 연도 감지
   const handleScroll = (container: HTMLDivElement) => {
