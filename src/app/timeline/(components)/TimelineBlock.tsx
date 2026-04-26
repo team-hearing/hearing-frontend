@@ -6,18 +6,25 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { worldHistoryData } from './worldHistoryData';
 import { getEventImagePath } from './eventImageMap';
+import type { ImageMeta } from '@/types/timeline';
 
 export type Event = {
   id: number;
   date: string;
   title: string;
   tags?: string[];
+  // BE 연동 후 채워지는 ImageMeta. 없으면 정적 eventImageMap으로 폴백.
+  thumbnail?: ImageMeta | null;
 };
 
 export type TimelineData = {
   year: number;
   events: Event[];
 };
+
+function resolveImageSrc(event: Event): string {
+  return event.thumbnail?.url ?? getEventImagePath(event.id);
+}
 
 // 타임라인 블록 컴포넌트
 const TimelineBlock = ({ data }: { data: TimelineData }) => {
@@ -57,12 +64,13 @@ const TimelineBlock = ({ data }: { data: TimelineData }) => {
                         </div>
                       ) : (
                         <Image
-                          src={getEventImagePath(event.id)}
+                          src={resolveImageSrc(event)}
                           alt={event.title}
                           fill
                           className="object-cover"
                           sizes="(max-width: 128px) 100vw, 128px"
                           onError={() => markFailed(event.id)}
+                          unoptimized={Boolean(event.thumbnail?.url)}
                         />
                       )}
                     </div>

@@ -1,18 +1,19 @@
 "use client";
 
-import { timelineData } from "./timelineData";
 import { worldHistoryData } from "./worldHistoryData";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Earth } from "lucide-react";
 import { getEventImagePath } from "./eventImageMap";
+import type { TimelineData } from "./TimelineBlock";
 
 interface MobileTimelineProps {
+  data: TimelineData[];
   onYearChange?: (year: number) => void;
 }
 
-const MobileTimeline = ({ onYearChange }: MobileTimelineProps = {}) => {
+const MobileTimeline = ({ data, onYearChange }: MobileTimelineProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const yearRefs = useRef<{[key: number]: HTMLDivElement | null}>({});
   const [activeYear, setActiveYear] = useState<number | null>(null);
@@ -99,7 +100,7 @@ const MobileTimeline = ({ onYearChange }: MobileTimelineProps = {}) => {
         <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-dark"></div>
 
 
-        {timelineData.map((yearData) => {
+        {data.map((yearData) => {
           const worldHistory = worldHistoryData.find(item => item.year === yearData.year);
           
           return (
@@ -134,12 +135,13 @@ const MobileTimeline = ({ onYearChange }: MobileTimelineProps = {}) => {
                           </div>
                         ) : (
                           <Image
-                            src={getImagePath(event.id)}
+                            src={event.thumbnail?.url ?? getImagePath(event.id)}
                             alt={event.title}
                             fill
                             className="object-cover"
                             sizes="(max-width: 768px) 100vw, 50vw"
                             onError={() => markFailed(event.id)}
+                            unoptimized={Boolean(event.thumbnail?.url)}
                           />
                         )}
                         {/* 텍스트 오버레이 */}
