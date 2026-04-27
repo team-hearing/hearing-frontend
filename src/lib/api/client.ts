@@ -1,22 +1,22 @@
 /**
  * Hearing 백엔드(SpringBoot) API 클라이언트.
  *
- * - 서버 컴포넌트에서는 process.env.API_BASE_URL을 사용하고,
- *   클라이언트 컴포넌트에서는 NEXT_PUBLIC_BASE_IMAGE_URL을 fallback으로 사용한다.
- * - BE가 아직 미구축인 단계이므로 fetch는 실패할 수 있다. 호출부는 null/error 분기를 처리해야 한다.
+ * 환경변수: NEXT_PUBLIC_BASE_URL (.env.local / .env.production 참고)
+ * 클라이언트와 서버 모두에서 동일하게 사용.
  */
 
 import type { ImageMeta, TimelineEvent } from "@/types/timeline";
 
+// 서버 전용 API_BASE_URL이 정의돼 있으면 우선(서버 사이드 한정),
+// 그렇지 않으면 NEXT_PUBLIC_BASE_URL 사용.
 const SERVER_BASE = process.env.API_BASE_URL;
-const CLIENT_BASE = process.env.NEXT_PUBLIC_BASE_IMAGE_URL;
+const PUBLIC_BASE = process.env.NEXT_PUBLIC_BASE_URL;
 
 function resolveBase(): string {
-  // 서버 사이드(SSR/RSC)에서는 server-only env가 우선
   if (typeof window === "undefined") {
-    return SERVER_BASE ?? CLIENT_BASE ?? "";
+    return SERVER_BASE ?? PUBLIC_BASE ?? "";
   }
-  return CLIENT_BASE ?? "";
+  return PUBLIC_BASE ?? "";
 }
 
 export class ApiError extends Error {
