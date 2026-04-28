@@ -1,4 +1,12 @@
-export default function ManageInform({item}) {
+interface ManageInformItem {
+  eventName?: string;
+  eventDate?: string;
+  startDate?: string;
+  endDate?: string;
+  description?: string;
+}
+
+export default function ManageInform({ item }: { item: ManageInformItem | null | undefined }) {
   const inputStyle = "border rounded w-full";
   const inputItemStyle = "flex flex-col gap-1";
 

@@ -1,15 +1,48 @@
+export type ImageLicense =
+  | "CC0"
+  | "CC-BY"
+  | "CC-BY-SA"
+  | "PUBLIC_DOMAIN"
+  | "KOGL_TYPE1"
+  | "KOGL_TYPE2"
+  | "KOGL_TYPE3"
+  | "KOGL_TYPE4"
+  | "OTHER";
+
+export interface ImageMeta {
+  imageId?: number;
+  url: string;
+  alt?: string;
+  source: string;
+  sourceUrl?: string;
+  author?: string;
+  license: ImageLicense;
+  licenseUrl?: string;
+}
+
+export interface VideoMeta {
+  videoId?: number;
+  url: string;
+  source?: string;
+}
+
+/**
+ * BE 응답(camelCase, ISO date string)을 그대로 매칭한 타입.
+ * - eventDate/startDate/endDate는 ISO 8601 형식의 "YYYY-MM-DD" 문자열
+ */
 export interface TimelineEvent {
   eventId: number;
   eventName: string;
-  description: string;
-  event_date: string;
-  start_date: string;
-  end_date: string;
-  thumbnail: string; // 파일 경로
-  // hist_video?: string[];
-  // hist_image?: string[];
+  description?: string;
+  keyFigures?: string;
+  eventDate?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
+  thumbnail?: ImageMeta | null;
+  images?: ImageMeta[];
+  videos?: VideoMeta[];
 }
 
-export type TimelineData = {
-  [year: number]: TimelineEvent[];
-}; 
+export type TimelineDataMap = {
+  [year: string]: TimelineEvent[];
+};
