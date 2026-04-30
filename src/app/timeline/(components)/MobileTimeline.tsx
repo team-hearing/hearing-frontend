@@ -1,6 +1,6 @@
 "use client";
 
-import { worldHistoryData } from "./worldHistoryData";
+import { worldHistoryData, type YearWorldHistory } from "./worldHistoryData";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -10,10 +10,12 @@ import type { TimelineData } from "./TimelineBlock";
 
 interface MobileTimelineProps {
   data: TimelineData[];
+  worldHistory?: YearWorldHistory[];
   onYearChange?: (year: number) => void;
 }
 
-const MobileTimeline = ({ data, onYearChange }: MobileTimelineProps) => {
+const MobileTimeline = ({ data, worldHistory, onYearChange }: MobileTimelineProps) => {
+  const worldSource = worldHistory ?? worldHistoryData;
   const containerRef = useRef<HTMLDivElement>(null);
   const yearRefs = useRef<{[key: number]: HTMLDivElement | null}>({});
   const [activeYear, setActiveYear] = useState<number | null>(null);
@@ -101,7 +103,7 @@ const MobileTimeline = ({ data, onYearChange }: MobileTimelineProps) => {
 
 
         {data.map((yearData) => {
-          const worldHistory = worldHistoryData.find(item => item.year === yearData.year);
+          const yearWorld = worldSource.find(item => item.year === yearData.year);
           
           return (
             <div 
@@ -155,7 +157,7 @@ const MobileTimeline = ({ data, onYearChange }: MobileTimelineProps) => {
               })}
 
               {/*세계사 토글*/}
-              {worldHistory && worldHistory.events.length > 0 && (
+              {yearWorld && yearWorld.events.length > 0 && (
                 <>
                   <button
                     onClick={() => toggleWorldHistory(yearData.year)}
@@ -171,7 +173,7 @@ const MobileTimeline = ({ data, onYearChange }: MobileTimelineProps) => {
                         세계사 ({yearData.year})
                       </div>
                       <ul className="list-disc pl-5 text-sm space-y-1">
-                        {worldHistory.events.map((worldEvent) => (
+                        {yearWorld.events.map((worldEvent) => (
                           <li key={worldEvent.id}>
                             {worldEvent.title}{' '}
                             {worldEvent.region && <span className="text-gray-400">({worldEvent.region})</span>}

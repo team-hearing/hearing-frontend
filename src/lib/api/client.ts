@@ -52,11 +52,13 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 export type EventsByYear = Record<string, TimelineEvent[]>;
 
 export const api = {
-  /** GET /hist-events/grouped-by-year - admin/timeline 페이지가 사용 */
+  /** GET /hist-events/grouped-by-year — 한국사 연도별 그룹 */
   getEventsByYear: () => request<EventsByYear>("/hist-events/grouped-by-year"),
-  /** GET /hist-events/:id - 사건 상세 */
+  /** GET /world-events/grouped-by-year — 세계사 연도별 그룹 */
+  getWorldEventsByYear: () => request<EventsByYear>("/world-events/grouped-by-year"),
+  /** GET /hist-events/:id — 사건 상세 (kind 무관) */
   getEvent: (id: number) => request<TimelineEvent>(`/hist-events/${id}`),
-  /** GET /hist-events/:id/images - 사건 이미지 목록 */
+  /** GET /hist-events/:id/images — 사건 이미지 목록 */
   getEventImages: (id: number) => request<unknown[]>(`/hist-events/${id}/images`),
 };
 
@@ -109,6 +111,35 @@ export function mapEventsByYearToTimelineData(data: EventsByYear): AdaptedYear[]
         date: formatDateShort(e.eventDate, e.startDate, e.endDate),
         title: e.eventName,
         thumbnail: e.thumbnail ?? null,
+      })),
+    }))
+    .filter((y) => Number.isFinite(y.year))
+    .sort((a, b) => b.year - a.year);
+}
+
+// ---------------------------------------------------------------------------
+// 세계사 어댑터 — TimelineBlock 하단의 세계사 영역에서 사용하는 형태
+// ---------------------------------------------------------------------------
+
+export type AdaptedWorldEvent = {
+  id: number;
+  title: string;
+  region?: string;
+};
+
+export type AdaptedWorldYear = {
+  year: number;
+  events: AdaptedWorldEvent[];
+};
+
+export function mapWorldEventsByYear(data: EventsByYear): AdaptedWorldYear[] {
+  return Object.entries(data)
+    .map(([year, events]) => ({
+      year: Number(year),
+      events: events.map((e) => ({
+        id: e.eventId,
+        title: e.eventName,
+        region: e.region ?? undefined,
       })),
     }))
     .filter((y) => Number.isFinite(y.year))

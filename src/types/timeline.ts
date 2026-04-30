@@ -30,8 +30,12 @@ export interface VideoMeta {
  * BE 응답(camelCase, ISO date string)을 그대로 매칭한 타입.
  * - eventDate/startDate/endDate는 ISO 8601 형식의 "YYYY-MM-DD" 문자열
  */
+export type EventKind = "KOREAN" | "WORLD";
+
 export interface TimelineEvent {
   eventId: number;
+  eventKind?: EventKind;
+  region?: string | null;
   eventName: string;
   description?: string;
   keyFigures?: string;
