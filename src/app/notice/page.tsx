@@ -2,13 +2,7 @@
 
 import Navigation from '../(components)/Navigation';
 import Link from 'next/link';
-
-// 공지사항 더미 데이터
-const notices = [
-  { id: 1, title: "서비스 오픈 안내", date: "2023.12.25" },
-  { id: 2, title: "12월 업데이트 내역", date: "2023.12.10" },
-  { id: 3, title: "사이트 점검 안내", date: "2023.11.20" },
-];
+import { notices } from './(components)/noticesData';
 
 export default function NoticePage() {
   return (

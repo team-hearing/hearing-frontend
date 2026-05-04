@@ -3,19 +3,17 @@
 import Navigation from '../../(components)/Navigation';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { ArrowLeft } from "lucide-react";
+import { getNoticeById } from '../(components)/noticesData';
 
 export default function NoticeDetailPage() {
-  const params = useParams();
-  const id = params.id;
+  const params = useParams<{ id: string }>();
+  const id = Number(params.id);
 
-  // 실제 데이터베이스에서 가져오거나 API 호출로 대체해야 합니다
-  const noticeData = {
-    id,
-    title: `공지사항 제목 #${id}`,
-    date: "2025.00.00",
-    content: `이 페이지는 #${id}의 상세 내용입니다. 실제 데이터는 서버에서 가져와야 합니다.`
-  };
+  // TODO(Step 4): BE GET /notices/:id로 교체
+  const noticeData = getNoticeById(id);
+  if (!noticeData) notFound();
 
   return (
     <div className="w-full h-screen flex flex-col bg-white">

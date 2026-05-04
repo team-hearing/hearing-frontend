@@ -1,61 +1,46 @@
 import Link from "next/link";
+import { api, type EventsByYear } from "@/lib/api/client";
+import type { TimelineEvent } from "@/types/timeline";
 
-async function getData() {
+async function getData(): Promise<{ data: EventsByYear | null; error: string | null }> {
   try {
-    const res = await fetch(`${process.env.API_BASE_URL}/hist-events/grouped-by-year`, {
-      cache: 'no-store', // SSR을 위해 캐싱 비활성화
-    });
-
-    //fetch메서드는 네트워크 오류(예: 서버 연결 실패)가 아닌 한, 404나 500 같은 HTTP 오류 상태 코드에서도 reject되지 않는다. 
-    //직접 thow error처리 필요
-    if (!res.ok) {
-      throw new Error(`HTTP error! Status: ${res.status}`);
-    }
-
-    const data = await res.json();
+    const data = await api.getEventsByYear();
     return { data, error: null };
-
-  } catch (error:any) {
-    console.error('Error fetching data:', error);
-    return { data: null, error: error.message };
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error("[admin] BE fetch failed:", msg);
+    return { data: null, error: msg };
   }
 }
 
-
 export default async function Admin() {
-  const {data:events,error} = await getData();
+  const { data: events, error } = await getData();
 
   return (
     <div>
       <h1>역사 사건 목록</h1>
 
-      {Object.keys(events).length?
-      <>
-        {Object.keys(events).map((year) => {
-          return (
-            <div key={year}>
-              {events[year].map((eventItem:any)=>{
-                return(
-                  <li key={eventItem.eventId} className="w-full">
-                    <Link href={`/admin/${eventItem.eventId}`}>
-                      <span>{year}</span>
-                      <span>{eventItem.eventName}</span>
-                      <span>{eventItem.eventDate}</span>
-                      <span>{eventItem.description}</span>
-                    </Link>
-                  </li>
-                )
-              })
+      {error && <div className="text-red-600 text-sm mb-2">BE 응답 실패: {error}</div>}
 
-              }
-            </div>
-          );
-        })}
-      </>:
-      <div>데이터 없음</div>
-      }  
+      {events && Object.keys(events).length > 0 ? (
+        Object.keys(events).map((year) => (
+          <div key={year}>
+            <h2 className="font-bold mt-4">{year}</h2>
+            {(events[year] as TimelineEvent[]).map((eventItem) => (
+              <li key={eventItem.eventId} className="w-full list-none">
+                <Link href={`/admin/${eventItem.eventId}`} className="flex gap-2 hover:bg-gray-100 px-2 py-1">
+                  <span>{year}</span>
+                  <span className="font-medium">{eventItem.eventName}</span>
+                  <span className="text-gray-500">{eventItem.eventDate ?? ""}</span>
+                  <span className="text-gray-400 truncate max-w-md">{eventItem.description ?? ""}</span>
+                </Link>
+              </li>
+            ))}
+          </div>
+        ))
+      ) : (
+        !error && <div>데이터 없음</div>
+      )}
     </div>
   );
 }
-
-
