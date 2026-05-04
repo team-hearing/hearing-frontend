@@ -18,6 +18,7 @@ export interface ImageMeta {
   author?: string;
   license: ImageLicense;
   licenseUrl?: string;
+  sortOrder?: number;
 }
 
 export interface VideoMeta {

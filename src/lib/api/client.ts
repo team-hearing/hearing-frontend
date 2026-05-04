@@ -46,20 +46,102 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   if (!res.ok) {
     throw new ApiError(`Upstream ${res.status} ${res.statusText}`, res.status);
   }
-  return (await res.json()) as T;
+  // 204 No Content 등 응답 바디 없는 경우 처리
+  const text = await res.text();
+  return (text ? JSON.parse(text) : null) as T;
+}
+
+/** 관리자 쓰기 요청 — Authorization: Bearer 토큰 헤더 추가 */
+function adminRequest<T>(path: string, init?: RequestInit): Promise<T> {
+  const token = process.env.NEXT_PUBLIC_ADMIN_TOKEN ?? "";
+  return request<T>(path, {
+    ...init,
+    headers: {
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...(init?.headers ?? {}),
+    },
+  });
 }
 
 export type EventsByYear = Record<string, TimelineEvent[]>;
 
+// ── 요청 바디 타입 ────────────────────────────────────────────────────────────
+
+export interface EventCreateBody {
+  eventName: string;
+  eventKind?: "KOREAN" | "WORLD";
+  region?: string;
+  description?: string;
+  keyFigures?: string;
+  eventDate?: string;
+  startDate?: string;
+  endDate?: string;
+}
+
+export interface EventUpdateBody {
+  eventName?: string;
+  region?: string;
+  description?: string;
+  keyFigures?: string;
+  eventDate?: string;
+  startDate?: string;
+  endDate?: string;
+}
+
+export interface ImageAddBody {
+  url: string;
+  alt?: string;
+  source?: string;
+  sourceUrl?: string;
+  author?: string;
+  license?: string;
+  licenseUrl?: string;
+  primary?: boolean;
+}
+
+// ── API 객체 ──────────────────────────────────────────────────────────────────
+
 export const api = {
+  // 조회 (GET)
   /** GET /hist-events/grouped-by-year — 한국사 연도별 그룹 */
   getEventsByYear: () => request<EventsByYear>("/hist-events/grouped-by-year"),
   /** GET /world-events/grouped-by-year — 세계사 연도별 그룹 */
   getWorldEventsByYear: () => request<EventsByYear>("/world-events/grouped-by-year"),
-  /** GET /hist-events/:id — 사건 상세 (kind 무관) */
+  /** GET /hist-events/:id — 사건 상세 */
   getEvent: (id: number) => request<TimelineEvent>(`/hist-events/${id}`),
-  /** GET /hist-events/:id/images — 사건 이미지 목록 */
-  getEventImages: (id: number) => request<unknown[]>(`/hist-events/${id}/images`),
+
+  // 사건 CRUD (F301)
+  /** POST /hist-events — 사건 등록 */
+  createEvent: (body: EventCreateBody) =>
+    adminRequest<TimelineEvent>("/hist-events", {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  /** PATCH /hist-events/:id — 사건 수정 (null 필드 스킵) */
+  updateEvent: (id: number, body: EventUpdateBody) =>
+    adminRequest<TimelineEvent>(`/hist-events/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(body),
+    }),
+
+  // 이미지 관리 (F302)
+  /** POST /hist-events/:id/images — 이미지 URL 추가 */
+  addImage: (eventId: number, body: ImageAddBody) =>
+    adminRequest<TimelineEvent>(`/hist-events/${eventId}/images`, {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  /** DELETE /hist-events/:eventId/images/:imageId — 이미지 삭제 */
+  deleteImage: (eventId: number, imageId: number) =>
+    adminRequest<null>(`/hist-events/${eventId}/images/${imageId}`, {
+      method: "DELETE",
+    }),
+  /** PUT /hist-events/:id/images/reorder — 갤러리 순서 변경 */
+  reorderImages: (eventId: number, imageIds: number[]) =>
+    adminRequest<TimelineEvent>(`/hist-events/${eventId}/images/reorder`, {
+      method: "PUT",
+      body: JSON.stringify({ imageIds }),
+    }),
 };
 
 // ---------------------------------------------------------------------------
