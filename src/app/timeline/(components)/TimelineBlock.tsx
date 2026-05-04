@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
-import { worldHistoryData } from './worldHistoryData';
+import { worldHistoryData, type YearWorldHistory } from './worldHistoryData';
 import { getEventImagePath } from './eventImageMap';
 import type { ImageMeta } from '@/types/timeline';
 
@@ -26,10 +26,16 @@ function resolveImageSrc(event: Event): string {
   return event.thumbnail?.url ?? getEventImagePath(event.id);
 }
 
+interface TimelineBlockProps {
+  data: TimelineData;
+  /** BE에서 받아온 세계사 데이터. 없으면 정적 worldHistoryData 폴백. */
+  worldHistory?: YearWorldHistory[];
+}
+
 // 타임라인 블록 컴포넌트
-const TimelineBlock = ({ data }: { data: TimelineData }) => {
-  // 해당 연도의 세계사 데이터 찾기
-  const worldHistory = worldHistoryData.find((item) => item.year === data.year);
+const TimelineBlock = ({ data, worldHistory }: TimelineBlockProps) => {
+  const source = worldHistory ?? worldHistoryData;
+  const yearWorld = source.find((item) => item.year === data.year);
   const [failedImages, setFailedImages] = useState<Set<number>>(new Set());
 
   const markFailed = (eventId: number) => {
@@ -102,7 +108,7 @@ const TimelineBlock = ({ data }: { data: TimelineData }) => {
         <div className="ml-1 sm:ml-2">
           <p className="font-bold mb-1 sm:mb-2 text-sm sm:text-base">세계사</p>
           <ul className="list-disc pl-3 sm:pl-4">
-            {worldHistory?.events.map((event) => (
+            {yearWorld?.events.map((event) => (
               <li key={event.id} className="text-sm mb-1">
                 {event.title}
                 {event.region && <span className="text-gray-500 ml-1">({event.region})</span>}
