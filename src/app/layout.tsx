@@ -1,26 +1,21 @@
-// app/layout.tsx
-import Link from 'next/link';
-import './globals.css';
+import type React from "react"
+import "@/app/globals.css"
 
 export const metadata = {
-  title: 'My Next.js App',
-  description: 'Next.js App Router Example',
-};
+  title: "역사를 듣다 - 히링(HEARING)",
+  description: "역사를 듣다 인트로 화면",
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
-    <html lang="ko">
-      <body>
-        <nav className="navbar">
-          <Link href="/">Home</Link>
-          <Link href="/timeline">Timeline</Link>
-        </nav>
-        <main>{children}</main>
+    <html lang="ko" className="h-full">
+      <body className="font-kr h-full">
+        {children}
       </body>
     </html>
-  );
+  )
 }
