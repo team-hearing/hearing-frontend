@@ -37,7 +37,7 @@ function buildFallback(eventId: number): PostData | null {
         title: e.title,
         content: `${block.year}년 ${e.date}에 일어난 사건입니다. 상세 설명은 백엔드 연동 후 제공됩니다.`,
         content2: "",
-        images: Array(8).fill(thumb),
+        images: [thumb, ...Array(7).fill("/img/default-placeholder.jpg")],
         beEvent: null,
       };
     }
@@ -63,7 +63,7 @@ function buildFromBE(event: TimelineEvent): PostData {
   }
   const slots: string[] = [];
   for (let i = 0; i < 8; i++) {
-    slots.push(baseUrls.length > 0 ? baseUrls[i % baseUrls.length] : "/img/default-placeholder.jpg");
+    slots.push(baseUrls[i] ?? "/img/default-placeholder.jpg");
   }
 
   return {

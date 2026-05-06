@@ -52,7 +52,6 @@ export default function GalleryPage({ content, images }: GalleryPageProps) {
       {/* 텍스트 영역 */}
       <div className="flex flex-col justify-center space-y-6">
         <p className="text-base sm:text-lg md:text-xl">{content}</p>
-        <p className="text-base sm:text-lg md:text-xl">{content}</p>
       </div>
     </div>
   );
