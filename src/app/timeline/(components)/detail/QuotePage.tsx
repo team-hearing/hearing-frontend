@@ -14,7 +14,7 @@ export default function QuotePage({ eventId }: QuotePageProps) {
   return (
     <div className="w-full">
       <blockquote className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium mb-8 sm:mb-12 md:mb-20 text-left">
-        " {quote} "
+        &quot; {quote} &quot;
       </blockquote>
       <div className="mt-12 sm:mt-16 md:mt-24 text-left">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
