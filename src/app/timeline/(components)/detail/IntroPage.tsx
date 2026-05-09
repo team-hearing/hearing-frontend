@@ -14,7 +14,7 @@ export default function IntroPage({ title, content, images }: IntroPageProps) {
       <div>
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-7xl font-bold mb-4 sm:mb-5 md:mb-6">{title}</h1>
         {/* 요약: 1~2문장, 반응형 line-clamp */}
-        <p className="text-sm sm:text-base lg:text-xl leading-relaxed line-clamp-4 sm:line-clamp-5 md:line-clamp-6 lg:line-clamp-8 mb-4 sm:mb-6 md:mb-8">
+        <p className="text-sm sm:text-base lg:text-xl leading-relaxed mb-4 sm:mb-6 md:mb-8">
           {content}
         </p>
       </div>

@@ -51,7 +51,7 @@ export default function GalleryPage({ content, images }: GalleryPageProps) {
       </div>
       {/* 텍스트 영역: 전체 본문, 반응형 line-clamp */}
       <div className="flex flex-col justify-center">
-        <p className="text-sm sm:text-base md:text-lg leading-relaxed line-clamp-[10] sm:line-clamp-[14] md:line-clamp-[18] lg:line-clamp-[22]">
+        <p className="text-sm sm:text-base md:text-lg leading-relaxed">
           {content}
         </p>
       </div>
