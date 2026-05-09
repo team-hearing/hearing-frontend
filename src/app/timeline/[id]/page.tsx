@@ -49,10 +49,12 @@ function buildFallback(eventId: number): PostData | null {
  * BE 응답을 IntroPage/GalleryPage가 기대하는 PostData 형태로 변환.
  */
 function splitDescription(desc: string): [string, string] {
-  const sentences = desc.split(/(?<=[.!?])\s+/);
-  if (sentences.length <= 1) return [desc, ""];
-  const mid = Math.ceil(sentences.length / 2);
-  return [sentences.slice(0, mid).join(" "), sentences.slice(mid).join(" ")];
+  // content  = 앞 1~2문장 (1페이지 요약)
+  // content2 = 전체 본문  (2페이지 상세)
+  const sentences = desc.split(/(?<=[.!?!？。])\s+/);
+  const summaryEnd = Math.min(2, sentences.length);
+  const summary = sentences.slice(0, summaryEnd).join(" ");
+  return [summary, desc];
 }
 
 function buildFromBE(event: TimelineEvent): PostData {
