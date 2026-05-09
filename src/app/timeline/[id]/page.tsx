@@ -35,7 +35,7 @@ function buildFallback(eventId: number): PostData | null {
       return {
         id: eventId,
         title: e.title,
-        content: `${block.year}년 ${e.date}에 일어난 사건입니다. 상세 설명은 백엔드 연동 후 제공됩니다.`,
+        content: `${block.year}년 ${e.date}에 일어난 사건입니다.`,
         content2: "",
         images: [thumb, ...Array(7).fill("/img/default-placeholder.jpg")],
         beEvent: null,
@@ -84,7 +84,7 @@ export default function DetailPage({
   const resolvedParams = use(params);
   const eventId = Number(resolvedParams.id);
 
-  const [post, setPost] = useState<PostData | null>(() => buildFallback(eventId));
+  const [post, setPost] = useState<PostData | null>(null);
   const [notFoundFlag, setNotFoundFlag] = useState(false);
 
   useEffect(() => {
@@ -98,12 +98,15 @@ export default function DetailPage({
       .catch((err: unknown) => {
         if (cancelled) return;
         if (err instanceof ApiError && err.status === 404) {
-          // BE에 없으면 폴백도 없을 때만 404
           if (!buildFallback(eventId)) {
             setNotFoundFlag(true);
+          } else {
+            setPost(buildFallback(eventId));
           }
         } else {
+          // 콜드 스타트 등 네트워크 오류 → 정적 폴백
           console.warn("[timeline/[id]] BE fetch failed, using fallback:", err);
+          setPost(buildFallback(eventId));
         }
       });
     return () => {
@@ -118,10 +121,10 @@ export default function DetailPage({
     notFound();
   }
   if (!post) {
-    // 폴백도 BE도 아직 없는 짧은 순간
     return (
-      <div className="h-screen bg-white flex items-center justify-center text-gray-500">
-        Loading...
+      <div className="h-screen bg-white flex flex-col items-center justify-center gap-4 text-gray-400">
+        <div className="w-8 h-8 border-2 border-gray-200 border-t-gray-600 rounded-full animate-spin" />
+        <p className="text-sm">사건 정보를 불러오는 중...</p>
       </div>
     );
   }
