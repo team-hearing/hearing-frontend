@@ -48,13 +48,21 @@ function buildFallback(eventId: number): PostData | null {
 /**
  * BE 응답을 IntroPage/GalleryPage가 기대하는 PostData 형태로 변환.
  */
+function splitDescription(desc: string): [string, string] {
+  const sentences = desc.split(/(?<=[.!?])\s+/);
+  if (sentences.length <= 1) return [desc, ""];
+  const mid = Math.ceil(sentences.length / 2);
+  return [sentences.slice(0, mid).join(" "), sentences.slice(mid).join(" ")];
+}
+
 function buildFromBE(event: TimelineEvent): PostData {
   const dateLabel = formatDateShort(event.eventDate, event.startDate, event.endDate);
-  const content = event.description?.trim()
+  const fullDesc = event.description?.trim()
     ? event.description
     : `${dateLabel}에 일어난 사건입니다.`;
 
-  // 이미지 슬롯 8개를 채우기 위해 BE images 배열을 반복 사용 (없으면 thumbnail 또는 placeholder)
+  const [content, content2] = splitDescription(fullDesc);
+
   const baseUrls: string[] = [];
   if (event.images && event.images.length > 0) {
     for (const img of event.images) baseUrls.push(img.url);
@@ -70,7 +78,7 @@ function buildFromBE(event: TimelineEvent): PostData {
     id: event.eventId,
     title: event.eventName,
     content,
-    content2: "",
+    content2,
     images: slots,
     beEvent: event,
   };
@@ -158,7 +166,7 @@ export default function DetailPage({
 
         {/* 2 페이지 */}
         <div className="min-w-full w-screen min-h-full snap-start overflow-y-auto hide-scrollbar px-4 sm:px-6 md:px-8 lg:px-12 pt-24 md:pt-28 pb-8 max-w-screen-2xl mx-auto">
-          <GalleryPage content={post.content} images={post.images} />
+          <GalleryPage content={post.content2 || post.content} images={post.images} />
         </div>
 
         {/* 3 페이지 */}
