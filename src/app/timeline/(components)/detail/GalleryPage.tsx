@@ -16,7 +16,7 @@ export default function GalleryPage({ content, images }: GalleryPageProps) {
         <div className="bg-gray-light aspect-video md:aspect-[4/3] lg:aspect-square flex items-center justify-center">
 
           <img
-            src={images[3] || '/placeholder.jpg'}
+            src={images[0] || '/img/default-placeholder.svg'}
             alt="갤러리 이미지 1"
             className="object-cover w-full h-full"
           />
@@ -25,7 +25,7 @@ export default function GalleryPage({ content, images }: GalleryPageProps) {
         <div className="bg-gray-light aspect-video md:aspect-[4/3] lg:aspect-square flex items-center justify-center">
 
           <img
-            src={images[4] || '/placeholder.jpg'}
+            src={images[1] || '/img/default-placeholder.svg'}
             alt="갤러리 이미지 2"
             className="object-cover w-full h-full"
           />
@@ -34,7 +34,7 @@ export default function GalleryPage({ content, images }: GalleryPageProps) {
         <div className="bg-gray-light aspect-video md:aspect-[4/3] lg:aspect-square flex items-center justify-center">
 
           <img
-            src={images[5] || '/placeholder.jpg'}
+            src={images[2] || '/img/default-placeholder.svg'}
             alt="갤러리 이미지 3"
             className="object-cover w-full h-full"
           />
@@ -43,7 +43,7 @@ export default function GalleryPage({ content, images }: GalleryPageProps) {
         <div className="bg-gray-light aspect-video md:aspect-[4/3] lg:aspect-square flex items-center justify-center">
 
           <img
-            src={images[6] || '/placeholder.jpg'}
+            src={images[3] || '/img/default-placeholder.svg'}
             alt="갤러리 이미지 4"
             className="object-cover w-full h-full"
           />

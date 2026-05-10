@@ -23,7 +23,7 @@ export default function IntroPage({ title, content, images }: IntroPageProps) {
         <div className="bg-gray-light aspect-[4/3] md:aspect-video flex items-center justify-center">
 
           <img
-            src={images[1] || '/placeholder.jpg'}
+            src={images[0] || '/img/default-placeholder.svg'}
             alt={`${title} 관련 이미지 1`}
             className="object-cover w-full h-full"
           />
@@ -32,7 +32,7 @@ export default function IntroPage({ title, content, images }: IntroPageProps) {
         <div className="bg-gray-light aspect-[4/3] md:aspect-video flex items-center justify-center">
 
           <img
-            src={images[2] || '/placeholder.jpg'}
+            src={images[1] || '/img/default-placeholder.svg'}
             alt={`${title} 관련 이미지 2`}
             className="object-cover w-full h-full"
           />
