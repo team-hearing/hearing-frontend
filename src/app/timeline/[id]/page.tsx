@@ -37,7 +37,7 @@ function buildFallback(eventId: number): PostData | null {
         title: e.title,
         content: `${block.year}년 ${e.date}에 일어난 사건입니다.`,
         content2: "",
-        images: [thumb, ...Array(7).fill("/img/default-placeholder.jpg")],
+        images: [thumb, ...Array(7).fill("/img/default-placeholder.svg")],
         beEvent: null,
       };
     }
@@ -74,7 +74,7 @@ function buildFromBE(event: TimelineEvent): PostData {
   }
   const slots: string[] = [];
   for (let i = 0; i < 8; i++) {
-    slots.push(baseUrls[i] ?? "/img/default-placeholder.jpg");
+    slots.push(baseUrls[i] ?? "/img/default-placeholder.svg");
   }
 
   return {
@@ -174,7 +174,7 @@ export default function DetailPage({
 
         {/* 3 페이지 */}
         <div className="min-w-full w-screen min-h-full snap-start overflow-y-auto hide-scrollbar px-4 sm:px-6 md:px-8 lg:px-12 pt-24 md:pt-28 pb-8 max-w-screen-2xl mx-auto">
-          <QuotePage eventId={post.id} />
+          <QuotePage eventId={post.id} images={post.images} />
         </div>
       </div>
     </div>

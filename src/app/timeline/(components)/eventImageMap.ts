@@ -44,7 +44,7 @@ export const eventImageFileMap: Record<number, string> = {
   38: "jeju-air 2216.png", // 제주항공 2216편 활주로 이탈 사고
 };
 
-const FALLBACK = "/img/default-placeholder.jpg";
+const FALLBACK = "/img/default-placeholder.svg";
 
 /**
  * 사건 ID에 해당하는 로컬 이미지 경로(public/img/*)를 반환한다.

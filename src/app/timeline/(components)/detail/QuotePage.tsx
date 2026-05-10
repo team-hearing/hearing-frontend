@@ -3,13 +3,17 @@ import { getQuoteByEventId, defaultQuote } from './quoteData';
 
 interface QuotePageProps {
   eventId: number;
+  images?: string[];
 }
 
 // 상세 페이지 3페이지
 
-export default function QuotePage({ eventId }: QuotePageProps) {
+export default function QuotePage({ eventId, images: eventImages }: QuotePageProps) {
   const quoteData = getQuoteByEventId(eventId) || defaultQuote;
-  const { quote, author, authorDesc, authorInfo, images } = quoteData;
+  const { quote, author, authorDesc, authorInfo } = quoteData;
+  // event 실제 이미지 우선, 없으면 placeholder
+  const img0 = eventImages?.[0] ?? "/img/default-placeholder.svg";
+  const img1 = eventImages?.[1] ?? "/img/default-placeholder.svg";
 
   return (
     <div className="w-full">
@@ -37,14 +41,14 @@ export default function QuotePage({ eventId }: QuotePageProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 flex-1 w-full max-w-md order-2 md:order-none">
               <div className="bg-gray-light aspect-square overflow-hidden w-full sm:w-42 h-48 sm:h-52">
                 <img
-                  src={images[6] || '/placeholder.jpg'}
+                  src={img0}
                   alt="참고 이미지 1"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="bg-gray-light aspect-square overflow-hidden w-full sm:w-42 h-48 sm:h-52">
                 <img
-                  src={images[7] || '/placeholder.jpg'}
+                  src={img1}
                   alt="참고 이미지 2"
                   className="w-full h-full object-cover"
                 />
